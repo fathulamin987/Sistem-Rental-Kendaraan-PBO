@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pbo.drive — Sistem Rental Kendaraan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="brand"><i class="fa-solid fa-bolt"></i> pbo.drive</a>
+        <ul class="nav-links">
+            <li><a href="/"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="/kendaraan"><i class="fa-solid fa-car"></i> Kendaraan</a></li>
+            <li><a href="/customer"><i class="fa-solid fa-users"></i> Customer</a></li>
+            <li><a href="/rental"><i class="fa-solid fa-key"></i> Rental</a></li>
+            <li><a href="/pembayaran"><i class="fa-solid fa-wallet"></i> Pembayaran</a></li>
+            <li><a href="/pengembalian"><i class="fa-solid fa-rotate-left"></i> Pengembalian</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,11 @@
+[
+    {
+        "id": "M001",
+        "nomor_plat": "L 5757 KL",
+        "merk": "Avanza",
+        "harga_sewa": 175000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 6
+    }
+]

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <span class="label">pbo.drive — Ready to Ride </span>
+    <h1>Sewa Mobil & Motor <br>Tanpa Ribet, Siap Jalan</h1>
+    <p>Temukan kendaraan terbaik untuk harian, liburan, atau nongkrong. Unit selalu terawat, harga transparan mulai dari Rp 160.000/hari!</p>
+    <div class="hero-button">
+        <a href="/kendaraan" class="button"><i class="fa-solid fa-car"></i> Lihat Armada</a>
+        <a href="/rental" class="button secondary"><i class="fa-solid fa-key"></i> Sewa Sekarang</a>
+    </div>
+</section>
+
+<section>
+    <h2 class="page-title"><i class="fa-solid fa-chart-line"></i> Ringkasan Sistem</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="card-info">
+                <p>Total Customer</p>
+                <h2>{{ customers|length }}</h2>
+            </div>
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+        </div>
+
+        <div class="card">
+            <div class="card-info">
+                <p>Total Kendaraan</p>
+                <h2>{{ kendaraan|length }}</h2>
+            </div>
+            <div class="card-icon"><i class="fa-solid fa-car"></i></div>
+        </div>
+
+        <div class="card">
+            <div class="card-info">
+                <p>Transaksi Rental</p>
+                <h2>{{ rentals|length }}</h2>
+            </div>
+            <div class="card-icon"><i class="fa-solid fa-key"></i></div>
+        </div>
+
+        <div class="card">
+            <div class="card-info">
+                <p>Pembayaran</p>
+                <h2>{{ pembayaran|length }}</h2>
+            </div>
+            <div class="card-icon"><i class="fa-solid fa-wallet"></i></div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 class="page-title"><i class="fa-solid fa-shield-halved"></i> Kendaraan Siap Sewa</h2>
+    <div class="vehicle-grid">
+        {% for item in kendaraan %}
+            {% if item.tersedia %}
+            <div class="vehicle-card">
+                <div>
+                    <span class="vehicle-badge-type">
+                        <i class="fa-solid {% if item.jenis == 'Mobil' %}fa-car{% else %}fa-motorcycle{% endif %}"></i>
+                        {{ item.jenis }}
+                    </span>
+                    <h3>{{ item.merk }}</h3>
+                    <p class="plat">{{ item.nomor_plat }}</p>
+                </div>
+                <div>
+                    <div class="vehicle-price">
+                        Rp {{ "{:,.0f}".format(item.harga_sewa) }} <small>/ hari</small>
+                    </div>
+                    <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> Tersedia</span>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

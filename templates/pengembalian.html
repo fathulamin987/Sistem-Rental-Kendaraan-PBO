@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title"><i class="fa-solid fa-rotate-left"></i> Pengembalian & Denda</h1>
+
+<div class="form-grid">
+    <div class="form-box">
+        <h2><i class="fa-solid fa-box-archive"></i> Proses Pengembalian</h2>
+        <form action="/pengembalian/tambah" method="POST">
+            <div class="form-group">
+                <label>Rental Berjalan</label>
+                <select name="rental_id" required>
+                    {% for item in rentals %}
+                    {% if item.status == "Berjalan" %}
+                    <option value="{{ item.id }}">{{ item.id }} - {{ item.kendaraan_id }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tanggal Kembali</label>
+                <input type="date" name="tanggal_kembali" required>
+            </div>
+
+            <div class="form-group">
+                <label>Kondisi Kendaraan</label>
+                <select name="kondisi" required>
+                    <option value="Baik">Baik</option>
+                    <option value="Rusak Ringan">Rusak Ringan</option>
+                    <option value="Rusak Berat">Rusak Berat</option>
+                </select>
+            </div>
+
+            <button type="submit" class="button"><i class="fa-solid fa-check-double"></i> Proses Pengembalian</button>
+        </form>
+    </div>
+
+    <div class="form-box">
+        <h2><i class="fa-solid fa-calculator"></i> Hitung Denda Keterlambatan</h2>
+        <form action="/denda/tambah" method="POST">
+            <div class="form-group">
+                <label>ID Rental</label>
+                <input type="text" name="rental_id" placeholder="Contoh: R001" required>
+            </div>
+
+            <div class="form-group">
+                <label>Hari Terlambat</label>
+                <input type="number" name="hari_terlambat" min="0" value="0" required>
+            </div>
+
+            <button type="submit" class="button secondary"><i class="fa-solid fa-coins"></i> Hitung Denda</button>
+        </form>
+    </div>
+</div>
+
+<h2>Riwayat Pengembalian</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Rental</th>
+                <th>Tanggal Kembali</th>
+                <th>Kondisi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pengembalian %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.rental_id }}</td>
+                <td>{{ item.tanggal_kembali }}</td>
+                <td>
+                    {% if item.kondisi == 'Baik' %}
+                        <span class="badge badge-success">{{ item.kondisi }}</span>
+                    {% else %}
+                        <span class="badge badge-danger">{{ item.kondisi }}</span>
+                    {% endif %}
+                </td>
+                <td class="action-cell">
+                    <button class="button secondary button-sm" onclick="bukaEditPengembalian('{{ item.id }}', '{{ item.tanggal_kembali }}', '{{ item.kondisi }}')">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                    <a href="/pengembalian/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Hapus riwayat pengembalian ini?')">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h2>Daftar Denda</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID Denda</th>
+                <th>ID Rental</th>
+                <th>Hari Terlambat</th>
+                <th>Total Denda</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in denda %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.rental_id }}</td>
+                <td>{{ item.hari_terlambat }} Hari</td>
+                <td><strong>{{ item.total_denda | rupiah }}</strong></td>
+                <td>
+                    <a href="/denda/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Hapus denda ini?')">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Edit Pengembalian -->
+<div id="editKembaliModal" class="modal">
+    <div class="modal-content">
+        <h3>Edit Data Pengembalian</h3>
+        <form id="editKembaliForm" method="POST">
+            <div class="form-group mt-12">
+                <label>Tanggal Kembali</label>
+                <input type="date" name="tanggal_kembali" id="edit_kembali_tgl" required>
+            </div>
+            <div class="form-group">
+                <label>Kondisi</label>
+                <select name="kondisi" id="edit_kembali_kondisi" required>
+                    <option value="Baik">Baik</option>
+                    <option value="Rusak Ringan">Rusak Ringan</option>
+                    <option value="Rusak Berat">Rusak Berat</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="button"><i class="fa-solid fa-check"></i> Simpan</button>
+                <button type="button" class="button secondary" onclick="tutupEditPengembalian()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function bukaEditPengembalian(id, tgl, kondisi) {
+    document.getElementById("editKembaliForm").action = "/pengembalian/edit/" + id;
+    document.getElementById("edit_kembali_tgl").value = tgl;
+    document.getElementById("edit_kembali_kondisi").value = kondisi;
+    document.getElementById("editKembaliModal").style.display = "flex";
+}
+
+function tutupEditPengembalian() {
+    document.getElementById("editKembaliModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

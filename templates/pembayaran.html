@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title"><i class="fa-solid fa-wallet"></i> Pembayaran</h1>
+
+<div class="form-box">
+    <h2><i class="fa-solid fa-receipt"></i> Input Pembayaran</h2>
+    <form action="/pembayaran/tambah" method="POST">
+        <div class="form-group">
+            <label>Pilih Transaksi Rental</label>
+            <select name="rental_id" required>
+                {% for item in rentals %}
+                <option value="{{ item.id }}">{{ item.id }} - Biaya: {{ item.total_biaya | rupiah }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah Pembayaran</label>
+            <input type="number" name="jumlah" min="1" placeholder="Masukkan jumlah bayar" required>
+        </div>
+
+        <div class="form-group">
+            <label>Metode Pembayaran</label>
+            <select name="metode" required>
+                <option value="Cash">Cash / Tunai</option>
+                <option value="Transfer">Transfer Bank</option>
+                <option value="E-Wallet">E-Wallet (QRIS/Dana/Ovo)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="button"><i class="fa-solid fa-check"></i> Proses Pembayaran</button>
+    </form>
+</div>
+
+<h2>Riwayat Pembayaran</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Rental</th>
+                <th>Jumlah</th>
+                <th>Metode</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pembayaran %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.rental_id }}</td>
+                <td><strong>{{ item.jumlah | rupiah }}</strong></td>
+                <td>{{ item.metode }}</td>
+                <td><span class="badge badge-success">{{ item.status }}</span></td>
+                <td class="action-cell">
+                    <button class="button secondary button-sm" onclick="bukaEditBayar('{{ item.id }}', '{{ item.jumlah }}', '{{ item.metode }}', '{{ item.status }}')">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                    <a href="/pembayaran/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Hapus data pembayaran ini?')">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Edit Pembayaran -->
+<div id="editBayarModal" class="modal">
+    <div class="modal-content">
+        <h3>Edit Data Pembayaran</h3>
+        <form id="editBayarForm" method="POST">
+            <div class="form-group mt-12">
+                <label>Jumlah</label>
+                <input type="number" name="jumlah" id="edit_bayar_jumlah" required>
+            </div>
+            <div class="form-group">
+                <label>Metode</label>
+                <select name="metode" id="edit_bayar_metode" required>
+                    <option value="Cash">Cash</option>
+                    <option value="Transfer">Transfer</option>
+                    <option value="E-Wallet">E-Wallet</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status" id="edit_bayar_status" required>
+                    <option value="Lunas">Lunas</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="button"><i class="fa-solid fa-check"></i> Simpan</button>
+                <button type="button" class="button secondary" onclick="tutupEditBayar()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function bukaEditBayar(id, jumlah, metode, status) {
+    document.getElementById("editBayarForm").action = "/pembayaran/edit/" + id;
+    document.getElementById("edit_bayar_jumlah").value = jumlah;
+    document.getElementById("edit_bayar_metode").value = metode;
+    document.getElementById("edit_bayar_status").value = status;
+    document.getElementById("editBayarModal").style.display = "flex";
+}
+
+function tutupEditBayar() {
+    document.getElementById("editBayarModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

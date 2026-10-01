@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title"><i class="fa-solid fa-users"></i> Kelola Customer</h1>
+
+<div class="form-box">
+    <h2><i class="fa-solid fa-user-plus"></i> Tambah Customer</h2>
+    <form action="/customer/tambah" method="POST">
+        <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" name="nama" placeholder="Masukkan nama lengkap" required>
+        </div>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Masukkan username" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Masukkan password" required>
+        </div>
+        <div class="form-group">
+            <label>No. KTP</label>
+            <input type="text" name="no_ktp" placeholder="351500..." required>
+        </div>
+        <div class="form-group">
+            <label>No. HP / Whatsapp</label>
+            <input type="text" name="no_hp" placeholder="0812..." required>
+        </div>
+        <button type="submit" class="button"><i class="fa-solid fa-floppy-disk"></i> Simpan Customer</button>
+    </form>
+</div>
+
+<h2>Daftar Customer</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>No. KTP</th>
+                <th>No. HP</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in customers %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.nama }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.no_ktp }}</td>
+                <td>{{ item.no_hp }}</td>
+                <td class="action-cell">
+                    <button class="button secondary button-sm" onclick="bukaEditCustomer('{{ item.id }}', '{{ item.nama }}', '{{ item.username }}', '{{ item.no_ktp }}', '{{ item.no_hp }}')">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                    <a href="/customer/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Yakin ingin menghapus customer ini?')">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Edit Customer -->
+<div id="editCustomerModal" class="modal">
+    <div class="modal-content">
+        <h3>Edit Data Customer</h3>
+        <form id="editCustomerForm" method="POST">
+            <div class="form-group mt-12">
+                <label>Nama Lengkap</label>
+                <input type="text" name="nama" id="edit_cust_nama" required>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" id="edit_cust_username" required>
+            </div>
+            <div class="form-group">
+                <label>No. KTP</label>
+                <input type="text" name="no_ktp" id="edit_cust_ktp" required>
+            </div>
+            <div class="form-group">
+                <label>No. HP</label>
+                <input type="text" name="no_hp" id="edit_cust_hp" required>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="button"><i class="fa-solid fa-check"></i> Simpan</button>
+                <button type="button" class="button secondary" onclick="tutupEditCustomer()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function bukaEditCustomer(id, nama, username, ktp, hp) {
+    document.getElementById("editCustomerForm").action = "/customer/edit/" + id;
+    document.getElementById("edit_cust_nama").value = nama;
+    document.getElementById("edit_cust_username").value = username;
+    document.getElementById("edit_cust_ktp").value = ktp;
+    document.getElementById("edit_cust_hp").value = hp;
+    document.getElementById("editCustomerModal").style.display = "flex";
+}
+
+function tutupEditCustomer() {
+    document.getElementById("editCustomerModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

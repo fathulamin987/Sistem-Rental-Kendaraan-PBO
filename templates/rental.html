@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title"><i class="fa-solid fa-key"></i> Transaksi Rental</h1>
+
+<div class="form-box">
+    <h2><i class="fa-solid fa-circle-plus"></i> Buat Transaksi Rental</h2>
+    <form action="/rental/tambah" method="POST">
+        <div class="form-group">
+            <label>Customer</label>
+            <select name="customer_id" required>
+                {% for item in customers %}
+                <option value="{{ item.id }}">{{ item.id }} - {{ item.nama }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Jenis Kendaraan</label>
+            <select name="jenis" required>
+                <option value="Mobil">Mobil</option>
+                <option value="Motor">Motor</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Kendaraan</label>
+            <select name="kendaraan_id" required>
+                {% for item in kendaraan %}
+                {% if item.tersedia %}
+                <option value="{{ item.id }}">{{ item.id }} - {{ item.merk }} ({{ item.nomor_plat }}) - {{ item.harga_sewa | rupiah }}/hari</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal Sewa</label>
+            <input type="date" name="tanggal_sewa" required>
+        </div>
+
+        <div class="form-group">
+            <label>Lama Sewa (Hari)</label>
+            <input type="number" name="lama_sewa" min="1" value="1" required>
+        </div>
+
+        <button type="submit" class="button"><i class="fa-solid fa-paper-plane"></i> Buat Transaksi</button>
+    </form>
+</div>
+
+<h2>Riwayat Rental</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Kendaraan</th>
+                <th>Tanggal</th>
+                <th>Lama</th>
+                <th>Total Biaya</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in rentals %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.customer_id }}</td>
+                <td>{{ item.kendaraan_id }}</td>
+                <td>{{ item.tanggal_sewa }}</td>
+                <td>{{ item.lama_sewa }} Hari</td>
+                <td><strong>{{ item.total_biaya | rupiah }}</strong></td>
+                <td>
+                    {% if item.status == 'Selesai' %}
+                        <span class="badge badge-success">{{ item.status }}</span>
+                    {% else %}
+                        <span class="badge badge-warning">{{ item.status }}</span>
+                    {% endif %}
+                </td>
+                <td class="action-cell">
+                    <button class="button secondary button-sm" onclick="bukaEditRental('{{ item.id }}', '{{ item.tanggal_sewa }}', '{{ item.lama_sewa }}', '{{ item.status }}')">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                    <a href="/rental/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Yakin ingin menghapus transaksi ini?')">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Edit Rental -->
+<div id="editRentalModal" class="modal">
+    <div class="modal-content">
+        <h3>Edit Transaksi Rental</h3>
+        <form id="editRentalForm" method="POST">
+            <div class="form-group mt-12">
+                <label>Tanggal Sewa</label>
+                <input type="date" name="tanggal_sewa" id="edit_rental_tgl" required>
+            </div>
+            <div class="form-group">
+                <label>Lama Sewa (Hari)</label>
+                <input type="number" name="lama_sewa" id="edit_rental_lama" min="1" required>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status" id="edit_rental_status" required>
+                    <option value="Berjalan">Berjalan</option>
+                    <option value="Selesai">Selesai</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="button"><i class="fa-solid fa-check"></i> Simpan</button>
+                <button type="button" class="button secondary" onclick="tutupEditRental()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function bukaEditRental(id, tgl, lama, status) {
+    document.getElementById("editRentalForm").action = "/rental/edit/" + id;
+    document.getElementById("edit_rental_tgl").value = tgl;
+    document.getElementById("edit_rental_lama").value = lama;
+    document.getElementById("edit_rental_status").value = status;
+    document.getElementById("editRentalModal").style.display = "flex";
+}
+
+function tutupEditRental() {
+    document.getElementById("editRentalModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

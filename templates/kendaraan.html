@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title"><i class="fa-solid fa-car-rear"></i> Kelola Kendaraan</h1>
+
+<div class="form-box">
+    <h2><i class="fa-solid fa-square-plus"></i> Tambah Kendaraan Baru</h2>
+    <form action="/kendaraan/tambah" method="POST">
+        <div class="form-group">
+            <label>Jenis Kendaraan</label>
+            <select name="jenis" id="jenis_select" onchange="toggleInputs()" required>
+                <option value="Mobil">Mobil</option>
+                <option value="Motor">Motor</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Merk Kendaraan</label>
+            <input type="text" name="merk" placeholder="Contoh: Honda HR-V / Vespa Primavera" required>
+        </div>
+
+        <div class="form-group">
+            <label>Nomor Plat</label>
+            <input type="text" name="nomor_plat" placeholder="Contoh: L 1234 AB" required>
+        </div>
+
+        <div class="form-group">
+            <label>Harga Sewa (per Hari)</label>
+            <input type="number" name="harga_sewa" placeholder="Contoh: 160000" min="1" required>
+        </div>
+
+        <div class="form-group" id="field_mobil">
+            <label>Jumlah Kursi</label>
+            <input type="number" name="jumlah_kursi" placeholder="Contoh: 5" min="1" value="5">
+        </div>
+
+        <div class="form-group d-none" id="field_motor">
+            <label>Kapasitas Mesin (cc)</label>
+            <input type="number" name="kapasitas_mesin" placeholder="Contoh: 150" min="1" value="150">
+        </div>
+
+        <button type="submit" class="button"><i class="fa-solid fa-floppy-disk"></i> Simpan Kendaraan</button>
+    </form>
+</div>
+
+<h2>Daftar Kendaraan</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Jenis</th>
+                <th>Merk</th>
+                <th>Nomor Plat</th>
+                <th>Harga Sewa</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in kendaraan %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.jenis }}</td>
+                <td>{{ item.merk }}</td>
+                <td><code>{{ item.nomor_plat }}</code></td>
+                <td><strong>{{ item.harga_sewa | rupiah }}</strong></td>
+                <td>
+                    {% if item.tersedia %}
+                        <span class="badge badge-success"><i class="fa-solid fa-check"></i> Tersedia</span>
+                    {% else %}
+                        <span class="badge badge-warning"><i class="fa-solid fa-clock"></i> Disewa</span>
+                    {% endif %}
+                </td>
+                <td class="action-cell">
+                    <button class="button secondary button-sm" onclick="bukaEditModal('{{ item.id }}', '{{ item.merk }}', '{{ item.nomor_plat }}', '{{ item.harga_sewa }}')">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                    <a href="/kendaraan/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Yakin ingin menghapus kendaraan ini?')">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Edit Kendaraan -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h3>Edit Kendaraan</h3>
+        <form id="editForm" method="POST">
+            <div class="form-group mt-12">
+                <label>Merk</label>
+                <input type="text" name="merk" id="edit_merk" required>
+            </div>
+            <div class="form-group">
+                <label>Nomor Plat</label>
+                <input type="text" name="nomor_plat" id="edit_plat" required>
+            </div>
+            <div class="form-group">
+                <label>Harga Sewa</label>
+                <input type="number" name="harga_sewa" id="edit_harga" required>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="button"><i class="fa-solid fa-check"></i> Simpan</button>
+                <button type="button" class="button secondary" onclick="tutupEditModal()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function toggleInputs() {
+    var jenis = document.getElementById("jenis_select").value;
+    document.getElementById("field_mobil").style.display = (jenis === "Mobil") ? "flex" : "none";
+    document.getElementById("field_motor").style.display = (jenis === "Motor") ? "flex" : "none";
+}
+
+function bukaEditModal(id, merk, plat, harga) {
+    document.getElementById("editForm").action = "/kendaraan/edit/" + id;
+    document.getElementById("edit_merk").value = merk;
+    document.getElementById("edit_plat").value = plat;
+    document.getElementById("edit_harga").value = harga;
+    document.getElementById("editModal").style.display = "flex";
+}
+
+function tutupEditModal() {
+    document.getElementById("editModal").style.display = "none";
+}
+</script>
+
+{% endblock %}
