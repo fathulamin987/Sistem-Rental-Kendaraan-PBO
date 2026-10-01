@@ -22,7 +22,7 @@
     "nomor_plat": "L 1234 MB",
     "merk": "Calya",
     "harga_sewa": 200000.0,
-    "tersedia": false,
+    "tersedia": true,
     "jenis": "Mobil",
     "jumlah_kursi": 7
   },

@@ -22,7 +22,7 @@
     "nomor_plat": "L 6721 CC",
     "merk": "Scoopy",
     "harga_sewa": 70000.0,
-    "tersedia": false,
+    "tersedia": true,
     "jenis": "Motor",
     "kapasitas_mesin": 110
   },
