@@ -1,0 +1,11 @@
+[
+    {
+        "id": "R001",
+        "customer_id": "C001",
+        "kendaraan_id": "M001",
+        "tanggal_sewa": "2026-09-30",
+        "lama_sewa": 1,
+        "total_biaya": 175000.0,
+        "status": "Selesai"
+    }
+]
