@@ -1,34 +1,34 @@
 [
     {
         "id": "C001",
-        "nama": "Mely Pamekasan",
+        "nama": "Mely Susantika Dewi",
         "username": "melysusantika",
         "password": "Melly123",
         "no_ktp": "35270000",
-        "no_hp": "081"
+        "no_hp": "0810000000000"
     },
     {
         "id": "C002",
-        "nama": "Amin Sampang",
+        "nama": "Fathul Amin",
         "username": "Amin",
         "password": "2346",
-        "no_ktp": "352603839",
-        "no_hp": "08234834902749"
+        "no_ktp": "35270001",
+        "no_hp": "0810000000001"
     },
     {
         "id": "C003",
-        "nama": "Azka Bangkalan",
+        "nama": "Azka Syaikhu",
         "username": "Azka",
         "password": "12345",
-        "no_ktp": "352940377624",
-        "no_hp": "08136387712"
+        "no_ktp": "35270002",
+        "no_hp": "0810000000002"
     },
     {
         "id": "C004",
-        "nama": "Elsa Sumatra",
+        "nama": "Elsa Maria Hutahean",
         "username": "Elsa",
         "password": "4536",
-        "no_ktp": "352871",
-        "no_hp": "08183737"
+        "no_ktp": "35270003",
+        "no_hp": "0810000000003"
     }
 ]
