@@ -1,38 +1,47 @@
 [
-  {
-    "id": "MT001",
-    "nomor_plat": "S 8476 ML",
-    "merk": "Vario",
-    "harga_sewa": 44000.0,
-    "tersedia": true,
-    "jenis": "Motor",
-    "kapasitas_mesin": 150
-  },
-  {
-    "id": "MT002",
-    "nomor_plat": "L 4589 BB",
-    "merk": "Beat",
-    "harga_sewa": 35000.0,
-    "tersedia": true,
-    "jenis": "Motor",
-    "kapasitas_mesin": 110
-  },
-  {
-    "id": "MT003",
-    "nomor_plat": "L 6721 CC",
-    "merk": "Scoopy",
-    "harga_sewa": 70000.0,
-    "tersedia": true,
-    "jenis": "Motor",
-    "kapasitas_mesin": 110
-  },
-  {
-    "id": "MT004",
-    "nomor_plat": "L 2890 DD",
-    "merk": "NMAX",
-    "harga_sewa": 110000.0,
-    "tersedia": true,
-    "jenis": "Motor",
-    "kapasitas_mesin": 155
-  }
+    {
+        "id": "MT001",
+        "nomor_plat": "S 8476 ML",
+        "merk": "Vario",
+        "harga_sewa": 44000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "kapasitas_mesin": 150
+    },
+    {
+        "id": "MT002",
+        "nomor_plat": "L 4589 BB",
+        "merk": "Beat",
+        "harga_sewa": 35000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "kapasitas_mesin": 110
+    },
+    {
+        "id": "MT003",
+        "nomor_plat": "L 6721 CC",
+        "merk": "Scoopy",
+        "harga_sewa": 70000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "kapasitas_mesin": 110
+    },
+    {
+        "id": "MT004",
+        "nomor_plat": "L 2890 DD",
+        "merk": "NMAX",
+        "harga_sewa": 110000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "kapasitas_mesin": 155
+    },
+    {
+        "id": "MT005",
+        "nomor_plat": "L 3322 MB",
+        "merk": "Filano",
+        "harga_sewa": 30000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "kapasitas_mesin": 147
+    }
 ]

@@ -1,38 +1,47 @@
 [
-  {
-    "id": "M001",
-    "nomor_plat": "L 5757 KL",
-    "merk": "Avanza",
-    "harga_sewa": 175000.0,
-    "tersedia": true,
-    "jenis": "Mobil",
-    "jumlah_kursi": 6
-  },
-  {
-    "id": "M002",
-    "nomor_plat": "L 1023 AA",
-    "merk": "Ayla",
-    "harga_sewa": 150000.0,
-    "tersedia": true,
-    "jenis": "Mobil",
-    "jumlah_kursi": 5
-  },
-  {
-    "id": "M003",
-    "nomor_plat": "L 1234 MB",
-    "merk": "Calya",
-    "harga_sewa": 200000.0,
-    "tersedia": true,
-    "jenis": "Mobil",
-    "jumlah_kursi": 7
-  },
-  {
-    "id": "M004",
-    "nomor_plat": "L 9999 RV",
-    "merk": "Innova Reborn",
-    "harga_sewa": 450000.0,
-    "tersedia": true,
-    "jenis": "Mobil",
-    "jumlah_kursi": 7
-  }
+    {
+        "id": "M001",
+        "nomor_plat": "L 5757 KL",
+        "merk": "Avanza",
+        "harga_sewa": 175000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 6
+    },
+    {
+        "id": "M002",
+        "nomor_plat": "L 1023 AA",
+        "merk": "Ayla",
+        "harga_sewa": 150000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 5
+    },
+    {
+        "id": "M003",
+        "nomor_plat": "L 1234 MB",
+        "merk": "Calya",
+        "harga_sewa": 200000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 7
+    },
+    {
+        "id": "M004",
+        "nomor_plat": "L 9999 RV",
+        "merk": "Innova Reborn",
+        "harga_sewa": 450000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 7
+    },
+    {
+        "id": "M005",
+        "nomor_plat": "M 4573 BA",
+        "merk": "Tesla",
+        "harga_sewa": 100000.0,
+        "tersedia": false,
+        "jenis": "Mobil",
+        "jumlah_kursi": 1
+    }
 ]

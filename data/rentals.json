@@ -7,5 +7,23 @@
         "lama_sewa": 1,
         "total_biaya": 175000.0,
         "status": "Selesai"
+    },
+    {
+        "id": "R002",
+        "customer_id": "C003",
+        "kendaraan_id": "M005",
+        "tanggal_sewa": "2026-10-02",
+        "lama_sewa": 1,
+        "total_biaya": 100000.0,
+        "status": "Berjalan"
+    },
+    {
+        "id": "R003",
+        "customer_id": "C002",
+        "kendaraan_id": "M001",
+        "tanggal_sewa": "2026-10-01",
+        "lama_sewa": 10,
+        "total_biaya": 1750000.0,
+        "status": "Selesai"
     }
 ]

@@ -1,27 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 
+/* Tema: rental kendaraan di siang hari yang cerah.
+   Biru langit, kuning matahari/plat, merah-koral untuk kendaraan. */
 :root {
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
-    --primary-light: #eff6ff;
-    --bg-body: #f8fafc;
+    --primary: #2f6bff;
+    --primary-hover: #1f55d6;
+    --primary-light: #e3edff;
+    --accent: #ffc52e;
+    --accent-hover: #eaaa00;
+    --coral: #ff5a4d;
+    --bg-body: #f0f6ff;
     --surface: #ffffff;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --border-hover: #cbd5e1;
-    --success-bg: #dcfce7;
-    --success-text: #15803d;
-    --warning-bg: #fef3c7;
-    --warning-text: #b45309;
-    --danger-bg: #fee2e2;
-    --danger-text: #b91c1c;
-    --radius-sm: 8px;
-    --radius-md: 12px;
+    --text-main: #14213d;
+    --text-muted: #5d6b82;
+    --border: #d6e2f5;
+    --border-hover: #a9bde0;
+    --success-bg: #d9f5e3;
+    --success-text: #12703f;
+    --warning-bg: #fff0bd;
+    --warning-text: #7a5300;
+    --danger-bg: #ffe0dc;
+    --danger-text: #b3261e;
+    --radius-sm: 6px;
+    --radius-md: 10px;
     --radius-lg: 16px;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+    --shadow-sm: 0 1px 2px rgba(47, 107, 255, 0.08);
+    --shadow-md: 0 6px 0 rgba(47, 107, 255, 0.15);
+    --shadow-lg: 0 8px 0 rgba(47, 107, 255, 0.22);
+    --font-display: 'Bricolage Grotesque', 'Figtree', sans-serif;
+
+    /* awan, bukit (latar hero) */
+    --clouds: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 90'><g fill='%23fff' fill-opacity='.92'><ellipse cx='70' cy='62' rx='60' ry='20'/><ellipse cx='100' cy='44' rx='34' ry='24'/><ellipse cx='44' cy='50' rx='26' ry='18'/><ellipse cx='244' cy='30' rx='46' ry='14'/><ellipse cx='266' cy='20' rx='24' ry='14'/></g></svg>");
+    --hills: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'><path d='M0 120V70Q100 20 220 60T440 50T660 40T800 70V120z' fill='%23a6d4ff'/><path d='M0 120V95Q140 60 280 90T560 80T800 95V120z' fill='%238cc6fa'/></svg>");
+
+    /* mobil (hero) */
+    --car-hero: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'><ellipse cx='200' cy='148' rx='180' ry='6' fill='%23000' fill-opacity='.2'/><polygon points='380,98 400,86 400,112' fill='%23ffe27a' fill-opacity='.7'/><path d='M20 112V96q0-10 12-12l52-8 44-36q6-6 16-6h108q10 0 18 8l36 34 54 8q20 4 20 20v8q0 8-8 8H20z' fill='%23ff5a4d'/><path d='M132 46h116l40 30H100z' fill='%23e3f3ff'/><path d='M190 46v30' stroke='%23ff5a4d' stroke-width='5'/><rect x='150' y='92' width='60' height='6' rx='3' fill='%23fff' fill-opacity='.6'/><rect x='366' y='94' width='14' height='8' rx='2' fill='%23ffe27a'/><rect x='20' y='92' width='8' height='8' rx='2' fill='%23b81d1d'/><g fill='%231f2a44' stroke='%23ffc52e' stroke-width='4'><circle cx='95' cy='118' r='28'/><circle cx='305' cy='118' r='28'/></g><g fill='%23e8eef9'><circle cx='95' cy='118' r='11'/><circle cx='305' cy='118' r='11'/></g></svg>");
+
+    /* motor (hero) */
+    --motor-hero: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'><ellipse cx='102' cy='148' rx='96' ry='6' fill='%23000' fill-opacity='.2'/><polygon points='178,60 200,48 200,76' fill='%23ffe27a' fill-opacity='.6'/><g fill='%231f2a44' stroke='%23ffc52e' stroke-width='4'><circle cx='46' cy='122' r='24'/><circle cx='158' cy='122' r='24'/></g><path d='M156 66L158 122' stroke='%23c9d4ea' stroke-width='6' stroke-linecap='round'/><g fill='%23e8eef9'><circle cx='46' cy='122' r='9'/><circle cx='158' cy='122' r='9'/></g><path d='M22 118Q16 92 36 84Q62 74 100 80L106 100L102 118Z' fill='%23ffb52e'/><path d='M26 82Q28 68 52 66L100 68Q110 70 108 79Q68 86 26 82z' fill='%238a5a3c'/><path d='M100 112H126V120H100Q96 116 100 112z' fill='%23e69a14'/><path d='M120 120Q114 90 132 70L150 60L158 66Q152 82 150 104L148 120z' fill='%23ffb52e'/><path d='M134 112Q140 93 160 93Q180 95 184 112L178 114Q172 101 160 101Q146 101 140 114z' fill='%23ffb52e'/><path d='M138 58Q150 47 166 52L170 62Q154 64 142 67z' fill='%23e69a14'/><path d='M146 52L142 36' stroke='%231f2a44' stroke-width='2.5' stroke-linecap='round'/><ellipse cx='141' cy='33' rx='7' ry='4' fill='%23c9d4ea' stroke='%231f2a44' stroke-width='2'/><circle cx='171' cy='60' r='11' fill='%23fff9d6' stroke='%23c9d4ea' stroke-width='3'/><circle cx='173' cy='60' r='5' fill='%23ffe27a'/><path d='M38 98Q70 90 98 97' stroke='%23fff' stroke-opacity='.7' stroke-width='3' fill='none' stroke-linecap='round'/><rect x='17' y='90' width='6' height='9' rx='2' fill='%23ff5a4d'/></svg>");
+
+    /* mobil (kartu kendaraan) */
+    --car-light: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'><ellipse cx='200' cy='148' rx='180' ry='6' fill='%23000' fill-opacity='.14'/><path d='M20 112V96q0-10 12-12l52-8 44-36q6-6 16-6h108q10 0 18 8l36 34 54 8q20 4 20 20v8q0 8-8 8H20z' fill='%232f6bff'/><path d='M132 46h116l40 30H100z' fill='%23e3f3ff'/><path d='M190 46v30' stroke='%232f6bff' stroke-width='5'/><rect x='150' y='92' width='60' height='6' rx='3' fill='%23ffc52e'/><rect x='366' y='94' width='14' height='8' rx='2' fill='%23ffc52e'/><rect x='20' y='92' width='8' height='8' rx='2' fill='%23ff5a4d'/><g fill='%231f2a44' stroke='%23ffc52e' stroke-width='4'><circle cx='95' cy='118' r='28'/><circle cx='305' cy='118' r='28'/></g><g fill='%23e8eef9'><circle cx='95' cy='118' r='11'/><circle cx='305' cy='118' r='11'/></g></svg>");
+
+    /* motor (kartu kendaraan) */
+    --motor-light: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'><ellipse cx='102' cy='148' rx='96' ry='6' fill='%23000' fill-opacity='.14'/><g fill='%231f2a44' stroke='%23ffc52e' stroke-width='4'><circle cx='46' cy='122' r='24'/><circle cx='158' cy='122' r='24'/></g><path d='M156 66L158 122' stroke='%23c9d4ea' stroke-width='6' stroke-linecap='round'/><g fill='%23e8eef9'><circle cx='46' cy='122' r='9'/><circle cx='158' cy='122' r='9'/></g><path d='M22 118Q16 92 36 84Q62 74 100 80L106 100L102 118Z' fill='%23ff6b4a'/><path d='M26 82Q28 68 52 66L100 68Q110 70 108 79Q68 86 26 82z' fill='%238a5a3c'/><path d='M100 112H126V120H100Q96 116 100 112z' fill='%23e5513a'/><path d='M120 120Q114 90 132 70L150 60L158 66Q152 82 150 104L148 120z' fill='%23ff6b4a'/><path d='M134 112Q140 93 160 93Q180 95 184 112L178 114Q172 101 160 101Q146 101 140 114z' fill='%23ff6b4a'/><path d='M138 58Q150 47 166 52L170 62Q154 64 142 67z' fill='%23e5513a'/><path d='M146 52L142 36' stroke='%231f2a44' stroke-width='2.5' stroke-linecap='round'/><ellipse cx='141' cy='33' rx='7' ry='4' fill='%23c9d4ea' stroke='%231f2a44' stroke-width='2'/><circle cx='171' cy='60' r='11' fill='%23fff9d6' stroke='%23c9d4ea' stroke-width='3'/><circle cx='173' cy='60' r='5' fill='%23ffc52e'/><path d='M38 98Q70 90 98 97' stroke='%23fff' stroke-opacity='.7' stroke-width='3' fill='none' stroke-linecap='round'/><rect x='17' y='90' width='6' height='9' rx='2' fill='%232f6bff'/></svg>");
+    /* kota, pepohonan, burung (dekorasi) */
+    --city: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 140'><g fill='%23bfe0fb'><rect x='0' y='60' width='40' height='80'/><rect x='44' y='30' width='36' height='110'/><rect x='84' y='70' width='30' height='70'/><rect x='118' y='20' width='44' height='120'/><rect x='166' y='55' width='34' height='85'/><rect x='204' y='80' width='40' height='60'/><rect x='248' y='40' width='38' height='100'/><rect x='290' y='65' width='44' height='75'/><rect x='338' y='15' width='34' height='125'/><rect x='376' y='58' width='40' height='82'/><rect x='420' y='75' width='36' height='65'/><rect x='460' y='35' width='44' height='105'/><rect x='508' y='62' width='36' height='78'/><rect x='548' y='45' width='52' height='95'/><rect x='138' y='6' width='3' height='16'/><rect x='353' y='2' width='3' height='16'/></g><g fill='%23e6f4ff'><rect x='30' y='70' width='6' height='8' rx='1'/><rect x='18' y='84' width='6' height='8' rx='1'/><rect x='30' y='84' width='6' height='8' rx='1'/><rect x='18' y='98' width='6' height='8' rx='1'/><rect x='6' y='112' width='6' height='8' rx='1'/><rect x='6' y='126' width='6' height='8' rx='1'/><rect x='18' y='126' width='6' height='8' rx='1'/><rect x='62' y='40' width='6' height='8' rx='1'/><rect x='50' y='54' width='6' height='8' rx='1'/><rect x='62' y='54' width='6' height='8' rx='1'/><rect x='50' y='68' width='6' height='8' rx='1'/><rect x='62' y='68' width='6' height='8' rx='1'/><rect x='62' y='82' width='6' height='8' rx='1'/><rect x='50' y='124' width='6' height='8' rx='1'/><rect x='90' y='80' width='6' height='8' rx='1'/><rect x='102' y='80' width='6' height='8' rx='1'/><rect x='90' y='94' width='6' height='8' rx='1'/><rect x='102' y='94' width='6' height='8' rx='1'/><rect x='102' y='122' width='6' height='8' rx='1'/><rect x='124' y='30' width='6' height='8' rx='1'/><rect x='148' y='30' width='6' height='8' rx='1'/><rect x='124' y='44' width='6' height='8' rx='1'/><rect x='148' y='44' width='6' height='8' rx='1'/><rect x='124' y='58' width='6' height='8' rx='1'/><rect x='148' y='58' width='6' height='8' rx='1'/><rect x='124' y='72' width='6' height='8' rx='1'/><rect x='136' y='72' width='6' height='8' rx='1'/><rect x='148' y='72' width='6' height='8' rx='1'/><rect x='136' y='86' width='6' height='8' rx='1'/><rect x='124' y='100' width='6' height='8' rx='1'/><rect x='136' y='100' width='6' height='8' rx='1'/><rect x='124' y='114' width='6' height='8' rx='1'/><rect x='148' y='114' width='6' height='8' rx='1'/><rect x='172' y='65' width='6' height='8' rx='1'/><rect x='184' y='65' width='6' height='8' rx='1'/><rect x='172' y='79' width='6' height='8' rx='1'/><rect x='172' y='93' width='6' height='8' rx='1'/><rect x='184' y='93' width='6' height='8' rx='1'/><rect x='172' y='107' width='6' height='8' rx='1'/><rect x='184' y='107' width='6' height='8' rx='1'/><rect x='172' y='121' width='6' height='8' rx='1'/><rect x='184' y='121' width='6' height='8' rx='1'/><rect x='210' y='90' width='6' height='8' rx='1'/><rect x='222' y='90' width='6' height='8' rx='1'/><rect x='210' y='104' width='6' height='8' rx='1'/><rect x='222' y='104' width='6' height='8' rx='1'/><rect x='234' y='104' width='6' height='8' rx='1'/><rect x='210' y='118' width='6' height='8' rx='1'/><rect x='234' y='118' width='6' height='8' rx='1'/><rect x='254' y='50' width='6' height='8' rx='1'/><rect x='254' y='64' width='6' height='8' rx='1'/><rect x='254' y='92' width='6' height='8' rx='1'/><rect x='266' y='106' width='6' height='8' rx='1'/><rect x='254' y='120' width='6' height='8' rx='1'/><rect x='296' y='75' width='6' height='8' rx='1'/><rect x='308' y='75' width='6' height='8' rx='1'/><rect x='320' y='75' width='6' height='8' rx='1'/><rect x='296' y='89' width='6' height='8' rx='1'/><rect x='308' y='89' width='6' height='8' rx='1'/><rect x='296' y='103' width='6' height='8' rx='1'/><rect x='308' y='103' width='6' height='8' rx='1'/><rect x='320' y='103' width='6' height='8' rx='1'/><rect x='296' y='117' width='6' height='8' rx='1'/><rect x='344' y='39' width='6' height='8' rx='1'/><rect x='356' y='39' width='6' height='8' rx='1'/><rect x='344' y='67' width='6' height='8' rx='1'/><rect x='356' y='67' width='6' height='8' rx='1'/><rect x='344' y='81' width='6' height='8' rx='1'/><rect x='356' y='81' width='6' height='8' rx='1'/><rect x='344' y='95' width='6' height='8' rx='1'/><rect x='356' y='95' width='6' height='8' rx='1'/><rect x='344' y='109' width='6' height='8' rx='1'/><rect x='356' y='109' width='6' height='8' rx='1'/><rect x='356' y='123' width='6' height='8' rx='1'/><rect x='382' y='68' width='6' height='8' rx='1'/><rect x='394' y='68' width='6' height='8' rx='1'/><rect x='406' y='68' width='6' height='8' rx='1'/><rect x='382' y='82' width='6' height='8' rx='1'/><rect x='394' y='82' width='6' height='8' rx='1'/><rect x='382' y='96' width='6' height='8' rx='1'/><rect x='438' y='85' width='6' height='8' rx='1'/><rect x='438' y='99' width='6' height='8' rx='1'/><rect x='426' y='113' width='6' height='8' rx='1'/><rect x='466' y='45' width='6' height='8' rx='1'/><rect x='490' y='45' width='6' height='8' rx='1'/><rect x='466' y='59' width='6' height='8' rx='1'/><rect x='478' y='59' width='6' height='8' rx='1'/><rect x='490' y='59' width='6' height='8' rx='1'/><rect x='478' y='87' width='6' height='8' rx='1'/><rect x='478' y='101' width='6' height='8' rx='1'/><rect x='490' y='101' width='6' height='8' rx='1'/><rect x='478' y='115' width='6' height='8' rx='1'/><rect x='514' y='72' width='6' height='8' rx='1'/><rect x='526' y='72' width='6' height='8' rx='1'/><rect x='514' y='86' width='6' height='8' rx='1'/><rect x='526' y='86' width='6' height='8' rx='1'/><rect x='526' y='100' width='6' height='8' rx='1'/><rect x='526' y='114' width='6' height='8' rx='1'/><rect x='554' y='55' width='6' height='8' rx='1'/><rect x='566' y='55' width='6' height='8' rx='1'/><rect x='554' y='69' width='6' height='8' rx='1'/><rect x='566' y='69' width='6' height='8' rx='1'/><rect x='578' y='69' width='6' height='8' rx='1'/><rect x='590' y='69' width='6' height='8' rx='1'/><rect x='554' y='83' width='6' height='8' rx='1'/><rect x='566' y='83' width='6' height='8' rx='1'/><rect x='590' y='83' width='6' height='8' rx='1'/><rect x='554' y='97' width='6' height='8' rx='1'/><rect x='566' y='111' width='6' height='8' rx='1'/><rect x='578' y='111' width='6' height='8' rx='1'/><rect x='590' y='111' width='6' height='8' rx='1'/><rect x='554' y='125' width='6' height='8' rx='1'/><rect x='566' y='125' width='6' height='8' rx='1'/><rect x='578' y='125' width='6' height='8' rx='1'/><rect x='590' y='125' width='6' height='8' rx='1'/></g></svg>");
+    --trees: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100'><rect x='57' y='56' width='7' height='44' rx='3' fill='%238a5a3c'/><g fill='%232fae6f'><circle cx='60' cy='38' r='26'/><circle cx='42' cy='54' r='18'/><circle cx='78' cy='54' r='18'/></g><g fill='%2346c785'><circle cx='54' cy='30' r='12'/><circle cx='72' cy='46' r='8'/></g><g fill='%232fae6f'><ellipse cx='150' cy='90' rx='30' ry='14'/><ellipse cx='176' cy='92' rx='20' ry='11'/></g><rect x='292' y='62' width='6' height='38' rx='3' fill='%238a5a3c'/><g fill='%232fae6f'><circle cx='295' cy='48' r='20'/><circle cx='281' cy='60' r='14'/><circle cx='309' cy='60' r='14'/></g><g fill='%2346c785'><circle cx='289' cy='42' r='9'/></g><rect x='344' y='24' width='4' height='76' fill='%236b7a99'/><path d='M346 26h-18' stroke='%236b7a99' stroke-width='4'/><circle cx='326' cy='30' r='6' fill='%23ffe27a'/></svg>");
+    --birds: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 40'><g fill='none' stroke='%233b5f9a' stroke-width='2' stroke-linecap='round'><path d='M4 18q8-10 16 0q8-10 16 0'/><path d='M44 8q6-8 12 0q6-8 12 0'/><path d='M58 30q5-7 10 0q5-7 10 0'/></g></svg>");
 }
 
 * {
@@ -31,18 +57,39 @@
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Figtree', sans-serif;
     background-color: var(--bg-body);
+    background-image: radial-gradient(rgba(47, 107, 255, 0.10) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
     color: var(--text-main);
     line-height: 1.6;
+    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+}
+
+/* siluet kota tipis di dasar halaman */
+body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 140px;
+    background: var(--city) left bottom / 600px 140px repeat-x;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: -1;
+}
+
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* NAVBAR */
 .navbar {
-    height: 72px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    height: 68px;
+    background: var(--primary);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,13 +97,24 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: var(--shadow-sm);
+}
+
+/* garis marka jalan di bawah navbar */
+.navbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 28px, var(--primary) 28px 44px);
 }
 
 .brand {
+    font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--primary);
+    color: #ffffff;
     text-decoration: none;
     letter-spacing: -0.5px;
     display: flex;
@@ -66,25 +124,33 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.25rem;
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text-muted);
+    color: #e3edff;
     font-weight: 500;
     font-size: 0.95rem;
-    transition: color 0.2s;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background 0.15s;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
 .nav-links a:hover {
-    color: var(--primary);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
+    background: var(--accent);
+    color: var(--text-main);
+    font-weight: 700;
 }
 
 /* MAIN CONTAINER */
@@ -95,45 +161,127 @@ body {
 }
 
 .page-title {
-    font-size: 1.75rem;
+    font-family: var(--font-display);
+    font-size: 1.9rem;
     font-weight: 800;
+    letter-spacing: -0.5px;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
-/* HERO SECTION */
+.page-title::before {
+    content: "";
+    width: 10px;
+    height: 30px;
+    border-radius: 3px;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+
+.page-title::after {
+    content: "";
+    flex: 1;
+    height: 0;
+    margin-left: 0.5rem;
+    border-top: 3px dashed var(--border-hover);
+    opacity: 0.7;
+}
+
+/* HERO: pemandangan siang hari (langit, matahari, awan, bukit, jalan) */
 .hero {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    color: #ffffff;
-    padding: 56px;
+    background:
+        linear-gradient(to top, transparent 49px, rgba(255, 255, 255, 0.6) 49px 52px, transparent 52px),
+        linear-gradient(to top, #4b5a76 0 52px, transparent 52px),
+        var(--trees) right bottom 52px / 360px 100px no-repeat,
+        var(--hills) left bottom 52px / 800px 120px repeat-x,
+        var(--city) left bottom 52px / 600px 140px repeat-x,
+        var(--clouds) 58% 26px / 300px auto no-repeat,
+        var(--clouds) 94% 96px / 190px auto no-repeat,
+        var(--birds) 74% 64px / 90px auto no-repeat,
+        radial-gradient(circle at 88% 22%, #ffe27a 0 38px, rgba(255, 255, 255, 0.55) 39px 70px, rgba(255, 255, 255, 0.25) 71px 92px, transparent 93px),
+        linear-gradient(180deg, #6fbcff 0%, #b9e0ff 60%, #e4f4ff 100%);
+    color: var(--text-main);
+    padding: 64px 56px 88px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
+    min-height: 360px;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* mobil & motor melaju di sisi kanan */
+.hero::before {
+    content: "";
+    position: absolute;
+    right: 20px;
+    bottom: 40px;
+    width: 52%;
+    aspect-ratio: 620 / 160;
+    background:
+        var(--car-hero) left bottom / 64.5% 100% no-repeat,
+        var(--motor-hero) right bottom / 32.3% 100% no-repeat;
+    animation: drive-in 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* marka jalan putus-putus */
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 36px, transparent 36px 68px);
+}
+
+@keyframes drive-in {
+    from { transform: translateX(120px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
 }
 
 .hero .label {
-    color: #60a5fa;
-    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: var(--primary-hover);
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.hero .label::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
 }
 
 .hero h1 {
-    font-size: 40px;
+    font-family: var(--font-display);
+    font-size: 48px;
     font-weight: 800;
-    line-height: 1.2;
-    margin: 12px 0 16px 0;
-    letter-spacing: -0.8px;
+    line-height: 1.08;
+    margin: 16px 0 16px 0;
+    letter-spacing: -1.4px;
+    max-width: 540px;
+    color: #0f2a5c;
 }
 
 .hero p {
-    color: #94a3b8;
-    max-width: 580px;
+    color: #27427a;
+    max-width: 460px;
     font-size: 16px;
     line-height: 1.7;
 }
@@ -146,58 +294,67 @@ body {
 
 /* BUTTONS */
 .button {
-    background: var(--primary);
-    color: white;
-    border: 1px solid var(--primary);
+    background: var(--accent);
+    color: var(--text-main);
+    border: 2px solid var(--accent);
     padding: 0.6rem 1.2rem;
     border-radius: var(--radius-sm);
-    font-weight: 600;
+    font-family: inherit;
+    font-weight: 700;
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: background 0.2s, transform 0.2s;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 3px 0 var(--accent-hover);
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
 .button:hover {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
+    background: #ffd154;
     transform: translateY(-1px);
+    box-shadow: 0 4px 0 var(--accent-hover);
+}
+
+.button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--accent-hover);
 }
 
 .button.secondary {
-    background: white;
-    color: var(--text-main);
-    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    box-shadow: 0 3px 0 var(--primary-light);
 }
 
 .button.secondary:hover {
-    background: #f1f5f9;
-    border-color: var(--border-hover);
+    background: var(--primary);
+    color: #ffffff;
 }
 
 .button.danger {
     background: var(--danger-bg);
     color: var(--danger-text);
     border-color: var(--danger-bg);
+    box-shadow: none;
 }
 
 .button.danger:hover {
-    background: #fca5a5;
+    background: #ffc7c0;
+    border-color: #ffc7c0;
 }
 
 .button-sm {
-    padding: 6px 12px;
+    padding: 5px 12px;
     font-size: 12px;
 }
 
-/* CARDS */
+/* STAT CARDS: warna-warni, ada motif ban di sudut */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    gap: 16px;
     margin-bottom: 40px;
 }
 
@@ -210,96 +367,197 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    right: -34px;
+    bottom: -44px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 16px solid currentColor;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.card > * {
+    position: relative;
+    z-index: 1;
 }
 
 .card-info p {
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
-    text-transform: uppercase;
 }
 
 .card-info h2 {
-    font-size: 32px;
+    font-family: var(--font-display);
+    font-size: 38px;
     font-weight: 800;
     color: var(--text-main);
+    line-height: 1.1;
     margin-top: 4px;
 }
 
 .card-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: var(--radius-md);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     background: var(--primary-light);
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 20px;
 }
+
+.card:nth-child(4n+1) {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.card:nth-child(4n+1) .card-info p { color: #dbe7ff; }
+.card:nth-child(4n+1) .card-info h2 { color: #ffffff; }
+.card:nth-child(4n+1) .card-icon { background: var(--accent); color: var(--text-main); }
+
+.card:nth-child(4n+2) {
+    background: var(--accent);
+    border-color: var(--accent-hover);
+}
+
+.card:nth-child(4n+2) .card-info p { color: #6b4e00; }
+.card:nth-child(4n+2) .card-icon { background: #ffffff; color: var(--accent-hover); }
+
+.card:nth-child(4n+4) {
+    background: var(--success-bg);
+    border-color: #a9e2bf;
+}
+
+.card:nth-child(4n+4) .card-info p { color: var(--success-text); }
+.card:nth-child(4n+4) .card-icon { background: var(--success-text); color: #ffffff; }
 
 /* VEHICLE CARDS */
 .vehicle-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    gap: 22px;
 }
 
 .vehicle-card {
+    --veh: var(--car-light);
+    --veh-size: 74% auto;
+    --sky: linear-gradient(180deg, #ffe9a6, #fff8dc);
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all 0.2s ease;
+    overflow: hidden;
     box-shadow: var(--shadow-sm);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.vehicle-card:nth-child(3n+2) { --sky: linear-gradient(180deg, #bfe0ff, #e8f4ff); }
+.vehicle-card:nth-child(3n+3) { --sky: linear-gradient(180deg, #c6f0d6, #eafaf0); }
+
+/* motor: pakai class .motor atau atribut data-type="motor" pada .vehicle-card */
+.vehicle-card.motor,
+.vehicle-card[data-type="motor"],
+.vehicle-card[data-jenis="motor"] {
+    --veh: var(--motor-light);
+    --veh-size: 42% auto;
+}
+
+/* otomatis jika badge jenis memakai ikon Font Awesome motor */
+.vehicle-card:has(.fa-motorcycle) {
+    --veh: var(--motor-light);
+    --veh-size: 42% auto;
+}
+
+.vehicle-card::before {
+    content: "";
+    height: 140px;
+    margin: -24px -24px 20px;
+    background:
+        var(--veh) 50% calc(100% - 14px) / var(--veh-size) no-repeat,
+        linear-gradient(to top, #b4c3dd 0 22px, transparent 22px),
+        var(--sky);
+    transition: background-position 0.35s ease;
 }
 
 .vehicle-card:hover {
     transform: translateY(-4px);
+    border-color: var(--primary);
     box-shadow: var(--shadow-md);
+}
+
+.vehicle-card:hover::before {
+    background-position: 58% calc(100% - 14px), 0 0, 0 0;
 }
 
 .vehicle-badge-type {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-hover);
     background: var(--primary-light);
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
     width: fit-content;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .vehicle-card h3 {
-    font-size: 20px;
+    font-family: var(--font-display);
+    font-size: 22px;
     font-weight: 700;
+    letter-spacing: -0.3px;
 }
 
+/* nomor polisi seperti plat kendaraan sewa */
 .vehicle-card .plat {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 16px;
+    display: inline-block;
+    width: fit-content;
+    margin: 8px 0 18px;
+    padding: 2px 12px;
+    background: var(--accent);
+    color: var(--text-main);
+    border: 2px solid var(--text-main);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
 
 .vehicle-price {
-    font-size: 22px;
+    font-family: var(--font-display);
+    font-size: 24px;
     font-weight: 800;
+    color: var(--primary-hover);
     margin-bottom: 16px;
+    padding-top: 14px;
+    border-top: 2px dashed var(--border);
 }
 
 .vehicle-price small {
+    font-family: 'Figtree', sans-serif;
     font-size: 13px;
     color: var(--text-muted);
     font-weight: 500;
@@ -310,29 +568,26 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 0.25rem 0.6rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     width: fit-content;
 }
 
-.badge-success {
-    background: var(--success-bg);
-    color: var(--success-text);
+.badge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
 }
 
-.badge-warning {
-    background: var(--warning-bg);
-    color: var(--warning-text);
-}
+.badge-success { background: var(--success-bg); color: var(--success-text); }
+.badge-warning { background: var(--warning-bg); color: var(--warning-text); }
+.badge-danger  { background: var(--danger-bg);  color: var(--danger-text); }
 
-.badge-danger {
-    background: var(--danger-bg);
-    color: var(--danger-text);
-}
-
-/* FORMS */
+/* FORMS: tepi atas bermotif bendera finish */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -343,20 +598,30 @@ body {
 .form-box {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     padding: 1.5rem;
     margin-bottom: 2rem;
+    overflow: hidden;
     box-shadow: var(--shadow-sm);
 }
 
+.form-box::before {
+    content: "";
+    display: block;
+    height: 10px;
+    margin: -1.5rem -1.5rem 1.25rem;
+    background: conic-gradient(var(--primary) 25%, #ffffff 0 50%, var(--primary) 0 75%, #ffffff 0) 0 0 / 10px 10px;
+}
+
 .form-box h2 {
-    font-size: 18px;
+    font-family: var(--font-display);
+    font-size: 19px;
     font-weight: 700;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 3px solid var(--accent);
     padding-bottom: 12px;
 }
 
@@ -375,33 +640,34 @@ form {
 .form-group label {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--text-main);
 }
 
 .form-group input,
 .form-group select {
-    padding: 0.6rem 0.8rem;
-    border: 1px solid var(--border);
+    padding: 0.65rem 0.8rem;
+    border: 1.5px solid var(--border-hover);
     border-radius: var(--radius-sm);
     font-size: 0.95rem;
     outline: none;
     font-family: inherit;
-    background: var(--surface);
+    background: #ffffff;
     color: var(--text-main);
-    transition: all 0.2s ease;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .form-group input:focus,
 .form-group select:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    box-shadow: 0 0 0 3px rgba(47, 107, 255, 0.22);
 }
 
 /* TABLES */
 .table-container {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
+    border-bottom: 5px solid var(--accent);
     overflow: hidden;
     margin-bottom: 2rem;
     box-shadow: var(--shadow-sm);
@@ -420,10 +686,13 @@ th, td {
 }
 
 th {
-    background: #f8fafc;
+    background: var(--primary);
     font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
+    color: #ffffff;
+}
+
+tbody tr:nth-child(even) td {
+    background: #f5f9ff;
 }
 
 tr:last-child td {
@@ -431,12 +700,24 @@ tr:last-child td {
 }
 
 tr:hover td {
-    background-color: #f8fafc;
+    background-color: #fff3c4;
 }
 
 .action-cell {
     display: flex;
     gap: 8px;
+}
+
+/* tampilan kosong (tambahkan class ini bila data belum ada) */
+.empty-state {
+    text-align: center;
+    padding: 130px 24px 56px;
+    color: var(--text-muted);
+    background:
+        var(--car-light) 50% 24px / 200px auto no-repeat,
+        var(--surface);
+    border: 2px dashed var(--border-hover);
+    border-radius: var(--radius-lg);
 }
 
 /* MODAL */
@@ -447,7 +728,7 @@ tr:hover td {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(20, 33, 61, 0.5);
     z-index: 2000;
     justify-content: center;
     align-items: center;
@@ -456,7 +737,8 @@ tr:hover td {
 .modal-content {
     background: var(--surface);
     padding: 24px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
+    border-top: 6px solid var(--accent);
     width: 400px;
     max-width: 90%;
 }
@@ -467,29 +749,63 @@ tr:hover td {
     margin-top: 16px;
 }
 
-/* HELPERS */
-.d-none {
-    display: none;
+/* FOOTER (jika ada) */
+footer {
+    margin-top: 3rem;
+    padding: 28px 8% 32px;
+    background: var(--primary);
+    color: #e3edff;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 4px solid var(--accent);
 }
 
-.mt-12 {
-    margin-top: 12px;
+/* HELPERS */
+.d-none { display: none; }
+.mt-12 { margin-top: 12px; }
+
+@media (max-width: 900px) {
+    .hero::before {
+        width: 56%;
+        opacity: 0.5;
+    }
 }
 
 @media (max-width: 768px) {
     .navbar {
         height: auto;
-        padding: 16px 20px;
+        padding: 14px 20px 18px;
         flex-direction: column;
-        gap: 16px;
+        gap: 10px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .hero {
-        padding: 32px 24px;
+        padding: 36px 24px 130px;
+        min-height: 0;
+    }
+    .hero::before {
+        width: 80%;
+        right: 12px;
+        bottom: 30px;
+        opacity: 0.95;
     }
     .hero h1 {
-        font-size: 28px;
+        font-size: 30px;
     }
     .form-grid {
         grid-template-columns: 1fr;
+    }
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
     }
 }

@@ -112,7 +112,7 @@
                 <td><strong>{{ item.id }}</strong></td>
                 <td>{{ item.rental_id }}</td>
                 <td>{{ item.hari_terlambat }} Hari</td>
-                <td><strong>{{ item.total_denda | rupiah }}</strong></td>
+                <td><strong>{{ item.jumlah_denda | rupiah }}</strong></td>
                 <td>
                     <a href="/denda/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Hapus denda ini?')">
                         <i class="fa-solid fa-trash"></i> Hapus

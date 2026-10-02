@@ -1,0 +1,8 @@
+[
+    {
+        "id": "D001",
+        "rental_id": "R003",
+        "hari_terlambat": 2,
+        "jumlah_denda": 100000
+    }
+]

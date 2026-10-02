@@ -4,5 +4,11 @@
         "rental_id": "R001",
         "tanggal_kembali": "2026-10-01",
         "kondisi": "Baik"
+    },
+    {
+        "id": "PG002",
+        "rental_id": "R003",
+        "tanggal_kembali": "2026-10-03",
+        "kondisi": "Baik"
     }
 ]
