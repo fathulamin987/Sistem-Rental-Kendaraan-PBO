@@ -50,6 +50,18 @@
 </section>
 
 <section>
+    <h2 class="page-title"><i class="fa-solid fa-gauge-high"></i> Statistik Operasional</h2>
+    <div class="cards">
+        <div class="card"><div class="card-info"><p>Pendapatan Diterima</p><h2>{{ stat.pendapatan | rupiah }}</h2></div><div class="card-icon"><i class="fa-solid fa-sack-dollar"></i></div></div>
+        <div class="card"><div class="card-info"><p>Piutang (Sisa Tagihan)</p><h2>{{ stat.piutang | rupiah }}</h2></div><div class="card-icon"><i class="fa-solid fa-hourglass-half"></i></div></div>
+        <div class="card"><div class="card-info"><p>Rental Berjalan</p><h2>{{ stat.rental_aktif }}</h2></div><div class="card-icon"><i class="fa-solid fa-road"></i></div></div>
+        <div class="card"><div class="card-info"><p>Rental Terlambat</p><h2>{{ stat.rental_terlambat }}</h2></div><div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div></div>
+        <div class="card"><div class="card-info"><p>Kendaraan Tersedia</p><h2>{{ stat.kendaraan_tersedia }}</h2></div><div class="card-icon"><i class="fa-solid fa-circle-check"></i></div></div>
+        <div class="card"><div class="card-info"><p>Total Denda</p><h2>{{ stat.total_denda | rupiah }}</h2></div><div class="card-icon"><i class="fa-solid fa-gavel"></i></div></div>
+    </div>
+</section>
+
+<section>
     <h2 class="page-title"><i class="fa-solid fa-shield-halved"></i> Kendaraan Siap Sewa</h2>
     <div class="vehicle-grid">
         {% for item in kendaraan %}

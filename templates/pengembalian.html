@@ -13,7 +13,7 @@
                 <select name="rental_id" required>
                     {% for item in rentals %}
                     {% if item.status == "Berjalan" %}
-                    <option value="{{ item.id }}">{{ item.id }} - {{ item.kendaraan_id }}</option>
+                    <option value="{{ item.id }}">{{ item.id }} - {{ item.kendaraan_label }} (jatuh tempo {{ item.jatuh_tempo }})</option>
                     {% endif %}
                     {% endfor %}
                 </select>
@@ -38,20 +38,14 @@
     </div>
 
     <div class="form-box">
-        <h2><i class="fa-solid fa-calculator"></i> Hitung Denda Keterlambatan</h2>
-        <form action="/denda/tambah" method="POST">
-            <div class="form-group">
-                <label>ID Rental</label>
-                <input type="text" name="rental_id" placeholder="Contoh: R001" required>
-            </div>
-
-            <div class="form-group">
-                <label>Hari Terlambat</label>
-                <input type="number" name="hari_terlambat" min="0" value="0" required>
-            </div>
-
-            <button type="submit" class="button secondary"><i class="fa-solid fa-coins"></i> Hitung Denda</button>
-        </form>
+        <h2><i class="fa-solid fa-calculator"></i> Aturan Denda Otomatis</h2>
+        <p>Denda dihitung otomatis saat pengembalian diproses (pola <strong>Strategy</strong>):</p>
+        <ul class="info-list">
+            <li>Telat per hari: <strong>Mobil Rp 100.000</strong>, <strong>Motor Rp 30.000</strong></li>
+            <li>Rusak Ringan: <strong>10%</strong> dari biaya sewa</li>
+            <li>Rusak Berat: <strong>30%</strong> dari biaya sewa</li>
+        </ul>
+        <p>Denda otomatis masuk ke tagihan rental dan dapat dibayar di menu Pembayaran.</p>
     </div>
 </div>
 
@@ -103,6 +97,7 @@
                 <th>ID Rental</th>
                 <th>Hari Terlambat</th>
                 <th>Total Denda</th>
+                <th>Keterangan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -113,6 +108,7 @@
                 <td>{{ item.rental_id }}</td>
                 <td>{{ item.hari_terlambat }} Hari</td>
                 <td><strong>{{ item.jumlah_denda | rupiah }}</strong></td>
+                <td>{{ item.keterangan | default('-') }}</td>
                 <td>
                     <a href="/denda/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Hapus denda ini?')">
                         <i class="fa-solid fa-trash"></i> Hapus

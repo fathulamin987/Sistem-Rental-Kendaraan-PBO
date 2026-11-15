@@ -5,7 +5,8 @@ class Denda:
         id,
         rental_id,
         hari_terlambat,
-        jumlah_denda=0
+        jumlah_denda=0,
+        keterangan=""
     ):
 
         if hari_terlambat < 0:
@@ -17,6 +18,7 @@ class Denda:
         self.rental_id = rental_id
         self.hari_terlambat = hari_terlambat
         self.jumlah_denda = jumlah_denda
+        self.keterangan = keterangan
 
     def hitung(self, tarif_per_hari=50000):
 
@@ -37,5 +39,6 @@ class Denda:
             "id": self.id,
             "rental_id": self.rental_id,
             "hari_terlambat": self.hari_terlambat,
-            "jumlah_denda": self.jumlah_denda
+            "jumlah_denda": self.jumlah_denda,
+            "keterangan": self.keterangan
         }

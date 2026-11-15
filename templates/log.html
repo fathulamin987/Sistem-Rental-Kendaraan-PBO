@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title"><i class="fa-solid fa-clock-rotate-left"></i> Log Aktivitas</h1>
+<p>Dicatat oleh satu instance <strong>ActivityLogger</strong> (pola Singleton).</p>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr><th>Waktu</th><th>Aksi</th><th>Detail</th></tr>
+        </thead>
+        <tbody>
+            {% for item in logs %}
+            <tr>
+                <td>{{ item.waktu }}</td>
+                <td><span class="badge badge-success">{{ item.aksi }}</span></td>
+                <td>{{ item.detail }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="3">Belum ada aktivitas.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -8,7 +8,8 @@ class Rental:
         tanggal_sewa,
         lama_sewa,
         total_biaya,
-        status="Berjalan"
+        status="Berjalan",
+        paket="reguler"
     ):
 
         if lama_sewa <= 0:
@@ -28,6 +29,7 @@ class Rental:
         self.lama_sewa = lama_sewa
         self.total_biaya = total_biaya
         self.status = status
+        self.paket = paket
 
     def selesai(self):
 
@@ -52,5 +54,6 @@ class Rental:
             "tanggal_sewa": self.tanggal_sewa,
             "lama_sewa": self.lama_sewa,
             "total_biaya": self.total_biaya,
-            "status": self.status
+            "status": self.status,
+            "paket": self.paket
         }

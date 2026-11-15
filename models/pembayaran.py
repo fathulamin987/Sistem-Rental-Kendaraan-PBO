@@ -6,7 +6,8 @@ class Pembayaran:
         rental_id,
         jumlah,
         metode,
-        status="Belum Lunas"
+        status="Belum Lunas",
+        biaya_admin=0
     ):
 
         if jumlah <= 0:
@@ -19,6 +20,7 @@ class Pembayaran:
         self.jumlah = jumlah
         self.metode = metode
         self.status = status
+        self.biaya_admin = biaya_admin
 
     def bayar(self):
 
@@ -41,5 +43,6 @@ class Pembayaran:
             "rental_id": self.rental_id,
             "jumlah": self.jumlah,
             "metode": self.metode,
-            "status": self.status
+            "status": self.status,
+            "biaya_admin": self.biaya_admin
         }

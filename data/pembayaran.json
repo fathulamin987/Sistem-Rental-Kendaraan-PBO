@@ -2,22 +2,25 @@
     {
         "id": "P001",
         "rental_id": "R001",
-        "jumlah": 175.0,
+        "jumlah": 175000.0,
         "metode": "Cash",
-        "status": "Lunas"
+        "status": "Lunas",
+        "biaya_admin": 0
     },
     {
         "id": "P002",
         "rental_id": "R001",
-        "jumlah": 100.0,
+        "jumlah": 100000.0,
         "metode": "Cash",
-        "status": "Pending"
+        "status": "Pending",
+        "biaya_admin": 0
     },
     {
         "id": "P003",
         "rental_id": "R003",
         "jumlah": 1750000.0,
         "metode": "Transfer",
-        "status": "Lunas"
+        "status": "Lunas",
+        "biaya_admin": 0
     }
 ]

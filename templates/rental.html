@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label>Jenis Kendaraan</label>
-            <select name="jenis" required>
+            <select name="jenis" id="pilihJenis" onchange="filterKendaraan()">
                 <option value="Mobil">Mobil</option>
                 <option value="Motor">Motor</option>
             </select>
@@ -26,10 +26,10 @@
 
         <div class="form-group">
             <label>Kendaraan</label>
-            <select name="kendaraan_id" required>
+            <select name="kendaraan_id" id="pilihKendaraan" required>
                 {% for item in kendaraan %}
                 {% if item.tersedia %}
-                <option value="{{ item.id }}">{{ item.id }} - {{ item.merk }} ({{ item.nomor_plat }}) - {{ item.harga_sewa | rupiah }}/hari</option>
+                <option value="{{ item.id }}" data-jenis="{{ item.jenis }}">{{ item.id }} - {{ item.merk }} ({{ item.nomor_plat }}) - {{ item.harga_sewa | rupiah }}/hari</option>
                 {% endif %}
                 {% endfor %}
             </select>
@@ -45,6 +45,15 @@
             <input type="number" name="lama_sewa" min="1" value="1" required>
         </div>
 
+        <div class="form-group">
+            <label>Paket Harga</label>
+            <select name="paket">
+                {% for p in paket %}
+                <option value="{{ p.kode }}">{{ p.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
         <button type="submit" class="button"><i class="fa-solid fa-paper-plane"></i> Buat Transaksi</button>
     </form>
 </div>
@@ -57,9 +66,10 @@
                 <th>ID</th>
                 <th>Customer</th>
                 <th>Kendaraan</th>
-                <th>Tanggal</th>
-                <th>Lama</th>
+                <th>Sewa → Jatuh Tempo</th>
+                <th>Paket</th>
                 <th>Total Biaya</th>
+                <th>Tagihan</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -68,22 +78,34 @@
             {% for item in rentals %}
             <tr>
                 <td><strong>{{ item.id }}</strong></td>
-                <td>{{ item.customer_id }}</td>
-                <td>{{ item.kendaraan_id }}</td>
-                <td>{{ item.tanggal_sewa }}</td>
-                <td>{{ item.lama_sewa }} Hari</td>
+                <td>{{ item.customer_nama }}</td>
+                <td>{{ item.kendaraan_label }}</td>
+                <td>{{ item.tanggal_sewa }} → {{ item.jatuh_tempo }}<br><small>{{ item.lama_sewa }} hari</small></td>
+                <td>{{ item.paket_label }}</td>
                 <td><strong>{{ item.total_biaya | rupiah }}</strong></td>
+                <td>
+                    {% if item.status_bayar == 'Lunas' %}<span class="badge badge-success">Lunas</span>
+                    {% else %}<span class="badge badge-warning">{{ item.status_bayar }}</span><br><small>Sisa {{ item.sisa | rupiah }}</small>{% endif %}
+                </td>
                 <td>
                     {% if item.status == 'Selesai' %}
                         <span class="badge badge-success">{{ item.status }}</span>
+                    {% elif item.status == 'Dibatalkan' %}
+                        <span class="badge badge-danger">{{ item.status }}</span>
                     {% else %}
                         <span class="badge badge-warning">{{ item.status }}</span>
                     {% endif %}
+                    {% if item.terlambat %}<br><span class="badge badge-danger">Terlambat</span>{% endif %}
                 </td>
                 <td class="action-cell">
-                    <button class="button secondary button-sm" onclick="bukaEditRental('{{ item.id }}', '{{ item.tanggal_sewa }}', '{{ item.lama_sewa }}', '{{ item.status }}')">
+                    {% if item.boleh_diedit %}
+                    <button class="button secondary button-sm" onclick="bukaEditRental('{{ item.id }}', '{{ item.tanggal_sewa }}', '{{ item.lama_sewa }}')">
                         <i class="fa-solid fa-pen-to-square"></i> Edit
                     </button>
+                    <a href="/rental/batal/{{ item.id }}" class="button secondary button-sm" onclick="return confirm('Batalkan rental ini?')">
+                        <i class="fa-solid fa-ban"></i> Batal
+                    </a>
+                    {% endif %}
                     <a href="/rental/hapus/{{ item.id }}" class="button danger button-sm" onclick="return confirm('Yakin ingin menghapus transaksi ini?')">
                         <i class="fa-solid fa-trash"></i> Hapus
                     </a>
@@ -107,13 +129,6 @@
                 <label>Lama Sewa (Hari)</label>
                 <input type="number" name="lama_sewa" id="edit_rental_lama" min="1" required>
             </div>
-            <div class="form-group">
-                <label>Status</label>
-                <select name="status" id="edit_rental_status" required>
-                    <option value="Berjalan">Berjalan</option>
-                    <option value="Selesai">Selesai</option>
-                </select>
-            </div>
             <div class="modal-actions">
                 <button type="submit" class="button"><i class="fa-solid fa-check"></i> Simpan</button>
                 <button type="button" class="button secondary" onclick="tutupEditRental()">Batal</button>
@@ -123,11 +138,23 @@
 </div>
 
 <script>
-function bukaEditRental(id, tgl, lama, status) {
+function filterKendaraan() {
+    const jenis = document.getElementById("pilihJenis").value;
+    const sel = document.getElementById("pilihKendaraan");
+    let pertama = null;
+    for (const o of sel.options) {
+        const cocok = o.dataset.jenis === jenis;
+        o.hidden = !cocok; o.disabled = !cocok;
+        if (cocok && !pertama) pertama = o;
+    }
+    sel.value = pertama ? pertama.value : "";
+}
+filterKendaraan();
+
+function bukaEditRental(id, tgl, lama) {
     document.getElementById("editRentalForm").action = "/rental/edit/" + id;
     document.getElementById("edit_rental_tgl").value = tgl;
     document.getElementById("edit_rental_lama").value = lama;
-    document.getElementById("edit_rental_status").value = status;
     document.getElementById("editRentalModal").style.display = "flex";
 }
 

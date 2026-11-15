@@ -1,22 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 from models.customer import Customer
-from models.admin import Admin
-from models.mobil import Mobil
-from models.motor import Motor
-from models.rental import Rental
-from models.pembayaran import Pembayaran
-from models.pengembalian import Pengembalian
-from models.denda import Denda
-
-from storage import baca_data, simpan_data
+from patterns.facade import RentalFacade
+from patterns.singleton_logger import ActivityLogger
+from patterns.strategy import daftar_harga_strategy
+from storage import baca_data, simpan_data, buat_id
 
 app = Flask(__name__)
+app.secret_key = "rental-pbo-secret"   # dibutuhkan flash(); ganti untuk produksi
 
+facade = RentalFacade()      # FACADE: satu pintu ke seluruh logika rental
+logger = ActivityLogger()    # SINGLETON: satu logger bersama (selalu instance yang sama)
 
-# ==================================================
-# CUSTOM JINJA FILTER (FORMAT RUPIAH: Rp 160.000)
-# ==================================================
 
 @app.template_filter('rupiah')
 def rupiah_filter(value):
@@ -26,53 +21,50 @@ def rupiah_filter(value):
         return "Rp 0"
 
 
-# ==================================================
-# BERANDA
-# ==================================================
+def kembali(endpoint, pesan=None, kategori="success"):
+    if pesan:
+        flash(pesan, kategori)
+    return redirect(url_for(endpoint))
 
+
+# ==================== BERANDA ====================
 @app.route("/")
 def index():
-    customers = baca_data("customers.json")
-    mobil = baca_data("mobil.json")
-    motor = baca_data("motor.json")
-    rentals = baca_data("rentals.json")
-    pembayaran = baca_data("pembayaran.json")
-
-    kendaraan = mobil + motor
-
+    kendaraan = facade.daftar_kendaraan()
     return render_template(
         "index.html",
-        customers=customers,
+        customers=baca_data("customers.json"),
         kendaraan=kendaraan,
-        rentals=rentals,
-        pembayaran=pembayaran
+        rentals=baca_data("rentals.json"),
+        pembayaran=baca_data("pembayaran.json"),
+        stat=facade.ringkasan(),
     )
 
 
-# ==================================================
-# CUSTOMER (CRUD)
-# ==================================================
-
+# ==================== CUSTOMER ====================
 @app.route("/customer")
 def customer():
-    customers = baca_data("customers.json")
-    return render_template("customer.html", customers=customers)
+    return render_template("customer.html", customers=baca_data("customers.json"))
 
 
 @app.route("/customer/tambah", methods=["POST"])
 def tambah_customer():
     customers = baca_data("customers.json")
-    customer = Customer(
-        "C" + str(len(customers) + 1).zfill(3),
-        request.form["nama"],
-        request.form["username"],
-        request.form["password"],
-        request.form["no_ktp"],
-        request.form["no_hp"]
-    )
-    customers.append(customer.get_data())
+    try:
+        if any(c["username"].lower() == request.form["username"].strip().lower()
+               for c in customers):
+            raise ValueError("Username sudah dipakai.")
+        if not request.form["nama"].strip():
+            raise ValueError("Nama harus diisi.")
+        baru = Customer(buat_id("C", customers), request.form["nama"].strip(),
+                        request.form["username"].strip(), request.form["password"],
+                        request.form["no_ktp"].strip(), request.form["no_hp"].strip())
+    except ValueError as error:
+        return kembali("customer", str(error), "error")
+    customers.append(baru.get_data())
     simpan_data("customers.json", customers)
-    return redirect(url_for("customer"))
+    logger.log("CUSTOMER_TAMBAH", f"{baru.id} {baru.nama}")
+    return kembali("customer", "Customer berhasil ditambahkan.")
 
 
 @app.route("/customer/edit/<id>", methods=["POST"])
@@ -86,353 +78,211 @@ def edit_customer(id):
             item["no_hp"] = request.form["no_hp"]
             break
     simpan_data("customers.json", customers)
-    return redirect(url_for("customer"))
+    logger.log("CUSTOMER_EDIT", id)
+    return kembali("customer", "Data customer diperbarui.")
 
 
 @app.route("/customer/hapus/<id>")
 def hapus_customer(id):
-    customers = baca_data("customers.json")
-    customers = [item for item in customers if item["id"] != id]
-    simpan_data("customers.json", customers)
-    return redirect(url_for("customer"))
+    if any(r["customer_id"] == id and r["status"] == "Berjalan"
+           for r in baca_data("rentals.json")):
+        return kembali("customer", "Customer masih memiliki rental berjalan.", "error")
+    simpan_data("customers.json",
+                [c for c in baca_data("customers.json") if c["id"] != id])
+    logger.log("CUSTOMER_HAPUS", id)
+    return kembali("customer", "Customer dihapus.")
 
 
-# ==================================================
-# KENDARAAN (CRUD)
-# ==================================================
-
+# ==================== KENDARAAN ====================
 @app.route("/kendaraan")
 def kendaraan():
-    mobil = baca_data("mobil.json")
-    motor = baca_data("motor.json")
-    return render_template("kendaraan.html", kendaraan=mobil + motor)
+    return render_template("kendaraan.html", kendaraan=facade.daftar_kendaraan())
 
 
 @app.route("/kendaraan/tambah", methods=["POST"])
 def tambah_kendaraan():
     jenis = request.form.get("jenis")
-    merk = request.form.get("merk")
-    nomor_plat = request.form.get("nomor_plat")
-    harga_sewa = float(request.form.get("harga_sewa", 0))
-
+    kunci = "jumlah_kursi" if jenis == "Mobil" else "kapasitas_mesin"
     try:
-        if jenis == "Mobil":
-            mobil_data = baca_data("mobil.json")
-            jumlah_kursi = int(request.form.get("jumlah_kursi", 0))
-            mobil = Mobil(
-                "M" + str(len(mobil_data) + 1).zfill(3),
-                nomor_plat,
-                merk,
-                harga_sewa,
-                jumlah_kursi
-            )
-            mobil_data.append(mobil.get_data())
-            simpan_data("mobil.json", mobil_data)
-        elif jenis == "Motor":
-            motor_data = baca_data("motor.json")
-            kapasitas_mesin = int(request.form.get("kapasitas_mesin", 0))
-            motor = Motor(
-                "MT" + str(len(motor_data) + 1).zfill(3),
-                nomor_plat,
-                merk,
-                harga_sewa,
-                kapasitas_mesin
-            )
-            motor_data.append(motor.get_data())
-            simpan_data("motor.json", motor_data)
+        facade.tambah_kendaraan(
+            jenis, request.form.get("merk", ""), request.form.get("nomor_plat", ""),
+            float(request.form.get("harga_sewa", 0)), int(request.form.get(kunci, 0)))
     except ValueError as error:
-        return str(error)
-
-    return redirect(url_for("kendaraan"))
+        return kembali("kendaraan", str(error), "error")
+    return kembali("kendaraan", "Kendaraan berhasil ditambahkan.")
 
 
 @app.route("/kendaraan/edit/<id>", methods=["POST"])
 def edit_kendaraan(id):
-    mobil_data = baca_data("mobil.json")
-    motor_data = baca_data("motor.json")
-
-    is_mobil = id.startswith("M") and not id.startswith("MT")
-
-    if is_mobil:
-        for item in mobil_data:
-            if item["id"] == id:
-                item["merk"] = request.form["merk"]
-                item["nomor_plat"] = request.form["nomor_plat"]
-                item["harga_sewa"] = float(request.form["harga_sewa"])
-                item["jumlah_kursi"] = int(request.form.get("jumlah_kursi", item.get("jumlah_kursi", 4)))
-                break
-        simpan_data("mobil.json", mobil_data)
-    else:
-        for item in motor_data:
-            if item["id"] == id:
-                item["merk"] = request.form["merk"]
-                item["nomor_plat"] = request.form["nomor_plat"]
-                item["harga_sewa"] = float(request.form["harga_sewa"])
-                item["kapasitas_mesin"] = int(request.form.get("kapasitas_mesin", item.get("kapasitas_mesin", 125)))
-                break
-        simpan_data("motor.json", motor_data)
-
-    return redirect(url_for("kendaraan"))
+    kunci = "jumlah_kursi" if id.startswith("M") and not id.startswith("MT") else "kapasitas_mesin"
+    try:
+        facade.edit_kendaraan(
+            id, request.form["merk"], request.form["nomor_plat"],
+            float(request.form["harga_sewa"]), int(request.form.get(kunci, 0)))
+    except ValueError as error:
+        return kembali("kendaraan", str(error), "error")
+    return kembali("kendaraan", "Kendaraan diperbarui.")
 
 
 @app.route("/kendaraan/hapus/<id>")
 def hapus_kendaraan(id):
-    mobil_data = baca_data("mobil.json")
-    motor_data = baca_data("motor.json")
-
-    mobil_data = [m for m in mobil_data if m["id"] != id]
-    motor_data = [m for m in motor_data if m["id"] != id]
-
-    simpan_data("mobil.json", mobil_data)
-    simpan_data("motor.json", motor_data)
-
-    return redirect(url_for("kendaraan"))
+    try:
+        facade.hapus_kendaraan(id)
+    except ValueError as error:
+        return kembali("kendaraan", str(error), "error")
+    return kembali("kendaraan", "Kendaraan dihapus.")
 
 
-# ==================================================
-# RENTAL (CRUD)
-# ==================================================
-
+# ==================== RENTAL ====================
 @app.route("/rental")
 def rental():
-    customers = baca_data("customers.json")
-    mobil = baca_data("mobil.json")
-    motor = baca_data("motor.json")
-    rentals = baca_data("rentals.json")
-    return render_template("rental.html", customers=customers, kendaraan=mobil + motor, rentals=rentals)
+    return render_template(
+        "rental.html",
+        customers=baca_data("customers.json"),
+        kendaraan=facade.daftar_kendaraan(),
+        rentals=facade.daftar_rental(),
+        paket=daftar_harga_strategy(),
+    )
 
 
 @app.route("/rental/tambah", methods=["POST"])
 def tambah_rental():
-    mobil_data = baca_data("mobil.json")
-    motor_data = baca_data("motor.json")
-    rentals = baca_data("rentals.json")
-
-    jenis = request.form["jenis"]
-    kendaraan_id = request.form["kendaraan_id"]
-    lama_sewa = int(request.form["lama_sewa"])
-    kendaraan = None
-
-    if jenis == "Mobil":
-        for data in mobil_data:
-            if data["id"] == kendaraan_id:
-                kendaraan = Mobil(data["id"], data["nomor_plat"], data["merk"], data["harga_sewa"], data["jumlah_kursi"], data["tersedia"])
-                break
-    else:
-        for data in motor_data:
-            if data["id"] == kendaraan_id:
-                kendaraan = Motor(data["id"], data["nomor_plat"], data["merk"], data["harga_sewa"], data["kapasitas_mesin"], data["tersedia"])
-                break
-
-    if kendaraan is None:
-        return "Kendaraan tidak ditemukan."
-
     try:
-        total = kendaraan.hitung_biaya(lama_sewa)
-        kendaraan.sewa()
-
-        rental = Rental(
-            "R" + str(len(rentals) + 1).zfill(3),
-            request.form["customer_id"],
-            kendaraan_id,
-            request.form["tanggal_sewa"],
-            lama_sewa,
-            total
-        )
-
-        rentals.append(rental.get_data())
-        simpan_data("rentals.json", rentals)
-
-        if jenis == "Mobil":
-            for data in mobil_data:
-                if data["id"] == kendaraan_id:
-                    data["tersedia"] = False
-            simpan_data("mobil.json", mobil_data)
-        else:
-            for data in motor_data:
-                if data["id"] == kendaraan_id:
-                    data["tersedia"] = False
-            simpan_data("motor.json", motor_data)
-
-        return redirect(url_for("rental"))
-
+        r = facade.sewa(
+            request.form["customer_id"], request.form["kendaraan_id"],
+            request.form["tanggal_sewa"], int(request.form["lama_sewa"]),
+            request.form.get("paket", "reguler"))
     except ValueError as error:
-        return str(error)
+        return kembali("rental", str(error), "error")
+    return kembali("rental", f"Rental {r.id} dibuat. Total {rupiah_filter(r.total_biaya)}.")
 
 
 @app.route("/rental/edit/<id>", methods=["POST"])
 def edit_rental(id):
-    rentals = baca_data("rentals.json")
-    for item in rentals:
-        if item["id"] == id:
-            item["tanggal_sewa"] = request.form["tanggal_sewa"]
-            item["lama_sewa"] = int(request.form["lama_sewa"])
-            item["status"] = request.form["status"]
-            break
-    simpan_data("rentals.json", rentals)
-    return redirect(url_for("rental"))
+    try:
+        facade.edit_rental(id, request.form["tanggal_sewa"], int(request.form["lama_sewa"]))
+    except ValueError as error:
+        return kembali("rental", str(error), "error")
+    return kembali("rental", "Rental diperbarui.")
+
+
+@app.route("/rental/batal/<id>")
+def batal_rental(id):
+    try:
+        facade.batalkan(id)
+    except ValueError as error:
+        return kembali("rental", str(error), "error")
+    return kembali("rental", "Rental dibatalkan, kendaraan tersedia kembali.")
 
 
 @app.route("/rental/hapus/<id>")
 def hapus_rental(id):
-    rentals = baca_data("rentals.json")
-    rentals = [r for r in rentals if r["id"] != id]
-    simpan_data("rentals.json", rentals)
-    return redirect(url_for("rental"))
+    try:
+        facade.hapus_rental(id)
+    except ValueError as error:
+        return kembali("rental", str(error), "error")
+    return kembali("rental", "Rental dihapus.")
 
 
-# ==================================================
-# PEMBAYARAN (CRUD)
-# ==================================================
-
+# ==================== PEMBAYARAN ====================
 @app.route("/pembayaran")
 def pembayaran():
-    rentals = baca_data("rentals.json")
-    pembayaran_data = baca_data("pembayaran.json")
-    return render_template("pembayaran.html", rentals=rentals, pembayaran=pembayaran_data)
+    return render_template("pembayaran.html", rentals=facade.daftar_rental(),
+                           pembayaran=baca_data("pembayaran.json"))
 
 
 @app.route("/pembayaran/tambah", methods=["POST"])
 def tambah_pembayaran():
-    pembayaran_data = baca_data("pembayaran.json")
     try:
-        pembayaran = Pembayaran(
-            "P" + str(len(pembayaran_data) + 1).zfill(3),
-            request.form["rental_id"],
-            float(request.form["jumlah"]),
-            request.form["metode"]
-        )
-        pembayaran.bayar()
-        pembayaran_data.append(pembayaran.get_data())
-        simpan_data("pembayaran.json", pembayaran_data)
+        facade.bayar(request.form["rental_id"], float(request.form["jumlah"]),
+                     request.form["metode"])
     except ValueError as error:
-        return str(error)
-
-    return redirect(url_for("pembayaran"))
+        return kembali("pembayaran", str(error), "error")
+    return kembali("pembayaran", "Pembayaran berhasil dicatat.")
 
 
 @app.route("/pembayaran/edit/<id>", methods=["POST"])
 def edit_pembayaran(id):
-    pembayaran_data = baca_data("pembayaran.json")
-    for item in pembayaran_data:
+    data = baca_data("pembayaran.json")
+    try:
+        jumlah = float(request.form["jumlah"])
+        if jumlah <= 0:
+            raise ValueError("Jumlah pembayaran harus lebih dari 0.")
+    except ValueError as error:
+        return kembali("pembayaran", str(error), "error")
+    for item in data:
         if item["id"] == id:
-            item["jumlah"] = float(request.form["jumlah"])
+            item["jumlah"] = jumlah
             item["metode"] = request.form["metode"]
             item["status"] = request.form["status"]
             break
-    simpan_data("pembayaran.json", pembayaran_data)
-    return redirect(url_for("pembayaran"))
+    simpan_data("pembayaran.json", data)
+    logger.log("PEMBAYARAN_EDIT", id)
+    return kembali("pembayaran", "Pembayaran diperbarui.")
 
 
 @app.route("/pembayaran/hapus/<id>")
 def hapus_pembayaran(id):
-    pembayaran_data = baca_data("pembayaran.json")
-    pembayaran_data = [p for p in pembayaran_data if p["id"] != id]
-    simpan_data("pembayaran.json", pembayaran_data)
-    return redirect(url_for("pembayaran"))
+    simpan_data("pembayaran.json",
+                [p for p in baca_data("pembayaran.json") if p["id"] != id])
+    logger.log("PEMBAYARAN_HAPUS", id)
+    return kembali("pembayaran", "Pembayaran dihapus.")
 
 
-# ==================================================
-# PENGEMBALIAN & DENDA (CRUD)
-# ==================================================
-
+# ==================== PENGEMBALIAN & DENDA ====================
 @app.route("/pengembalian")
 def pengembalian():
-    rentals = baca_data("rentals.json")
-    pengembalian_data = baca_data("pengembalian.json")
-    denda_data = baca_data("denda.json")
-    return render_template("pengembalian.html", rentals=rentals, pengembalian=pengembalian_data, denda=denda_data)
+    return render_template("pengembalian.html", rentals=facade.daftar_rental(),
+                           pengembalian=baca_data("pengembalian.json"),
+                           denda=baca_data("denda.json"))
 
 
 @app.route("/pengembalian/tambah", methods=["POST"])
 def tambah_pengembalian():
-    pengembalian_data = baca_data("pengembalian.json")
-    rental_data = baca_data("rentals.json")
-    mobil_data = baca_data("mobil.json")
-    motor_data = baca_data("motor.json")
-
     try:
-        pengembalian = Pengembalian(
-            "PG" + str(len(pengembalian_data) + 1).zfill(3),
-            request.form["rental_id"],
-            request.form["tanggal_kembali"],
-            request.form["kondisi"]
-        )
-        pengembalian.proses()
-        pengembalian_data.append(pengembalian.get_data())
-        simpan_data("pengembalian.json", pengembalian_data)
-
-        rental_id = request.form["rental_id"]
-        kendaraan_id = None
-
-        for rental in rental_data:
-            if rental["id"] == rental_id:
-                kendaraan_id = rental["kendaraan_id"]
-                rental["status"] = "Selesai"
-
-        simpan_data("rentals.json", rental_data)
-
-        for kendaraan in mobil_data:
-            if kendaraan["id"] == kendaraan_id:
-                kendaraan["tersedia"] = True
-
-        for kendaraan in motor_data:
-            if kendaraan["id"] == kendaraan_id:
-                kendaraan["tersedia"] = True
-
-        simpan_data("mobil.json", mobil_data)
-        simpan_data("motor.json", motor_data)
-
+        _, denda = facade.kembalikan(request.form["rental_id"],
+                                     request.form["tanggal_kembali"], request.form["kondisi"])
     except ValueError as error:
-        return str(error)
-
-    return redirect(url_for("pengembalian"))
+        return kembali("pengembalian", str(error), "error")
+    if denda:
+        return kembali("pengembalian",
+                       f"Pengembalian diproses. Denda otomatis: {rupiah_filter(denda.jumlah_denda)}.",
+                       "warning")
+    return kembali("pengembalian", "Pengembalian diproses tanpa denda.")
 
 
 @app.route("/pengembalian/edit/<id>", methods=["POST"])
 def edit_pengembalian(id):
-    pengembalian_data = baca_data("pengembalian.json")
-    for item in pengembalian_data:
+    data = baca_data("pengembalian.json")
+    for item in data:
         if item["id"] == id:
             item["tanggal_kembali"] = request.form["tanggal_kembali"]
             item["kondisi"] = request.form["kondisi"]
             break
-    simpan_data("pengembalian.json", pengembalian_data)
-    return redirect(url_for("pengembalian"))
+    simpan_data("pengembalian.json", data)
+    logger.log("PENGEMBALIAN_EDIT", id)
+    return kembali("pengembalian", "Data pengembalian diperbarui.")
 
 
 @app.route("/pengembalian/hapus/<id>")
 def hapus_pengembalian(id):
-    pengembalian_data = baca_data("pengembalian.json")
-    pengembalian_data = [p for p in pengembalian_data if p["id"] != id]
-    simpan_data("pengembalian.json", pengembalian_data)
-    return redirect(url_for("pengembalian"))
-
-
-@app.route("/denda/tambah", methods=["POST"])
-def tambah_denda():
-    denda_data = baca_data("denda.json")
-    try:
-        denda = Denda(
-            "D" + str(len(denda_data) + 1).zfill(3),
-            request.form["rental_id"],
-            int(request.form["hari_terlambat"])
-        )
-        denda.hitung()
-        denda_data.append(denda.get_data())
-        simpan_data("denda.json", denda_data)
-    except ValueError as error:
-        return str(error)
-
-    return redirect(url_for("pengembalian"))
+    simpan_data("pengembalian.json",
+                [p for p in baca_data("pengembalian.json") if p["id"] != id])
+    logger.log("PENGEMBALIAN_HAPUS", id)
+    return kembali("pengembalian", "Riwayat pengembalian dihapus.")
 
 
 @app.route("/denda/hapus/<id>")
 def hapus_denda(id):
-    denda_data = baca_data("denda.json")
-    denda_data = [d for d in denda_data if d["id"] != id]
-    simpan_data("denda.json", denda_data)
-    return redirect(url_for("pengembalian"))
+    simpan_data("denda.json", [d for d in baca_data("denda.json") if d["id"] != id])
+    logger.log("DENDA_HAPUS", id)
+    return kembali("pengembalian", "Denda dihapus.")
+
+
+# ==================== LOG AKTIVITAS ====================
+@app.route("/log")
+def log_aktivitas():
+    return render_template("log.html", logs=logger.terbaru(100))
 
 
 if __name__ == "__main__":

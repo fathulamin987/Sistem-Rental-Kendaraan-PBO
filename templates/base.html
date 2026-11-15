@@ -17,9 +17,15 @@
             <li><a href="/rental"><i class="fa-solid fa-key"></i> Rental</a></li>
             <li><a href="/pembayaran"><i class="fa-solid fa-wallet"></i> Pembayaran</a></li>
             <li><a href="/pengembalian"><i class="fa-solid fa-rotate-left"></i> Pengembalian</a></li>
+            <li><a href="/log"><i class="fa-solid fa-clock-rotate-left"></i> Log</a></li>
         </ul>
     </nav>
     <main class="container">
+        {% with pesan = get_flashed_messages(with_categories=true) %}
+        {% for kategori, isi in pesan %}
+        <div class="flash flash-{{ kategori }}">{{ isi }}</div>
+        {% endfor %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </main>
 </body>

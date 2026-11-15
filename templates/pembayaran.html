@@ -11,7 +11,9 @@
             <label>Pilih Transaksi Rental</label>
             <select name="rental_id" required>
                 {% for item in rentals %}
-                <option value="{{ item.id }}">{{ item.id }} - Biaya: {{ item.total_biaya | rupiah }}</option>
+                {% if item.sisa > 0 and item.status != 'Dibatalkan' %}
+                <option value="{{ item.id }}">{{ item.id }} - {{ item.customer_nama }} - Sisa tagihan: {{ item.sisa | rupiah }}</option>
+                {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -25,13 +27,38 @@
             <label>Metode Pembayaran</label>
             <select name="metode" required>
                 <option value="Cash">Cash / Tunai</option>
-                <option value="Transfer">Transfer Bank</option>
-                <option value="E-Wallet">E-Wallet (QRIS/Dana/Ovo)</option>
+                <option value="Transfer">Transfer Bank (admin Rp 2.500)</option>
+                <option value="E-Wallet">E-Wallet (admin 0,7%)</option>
             </select>
         </div>
 
         <button type="submit" class="button"><i class="fa-solid fa-check"></i> Proses Pembayaran</button>
     </form>
+</div>
+
+<h2>Tagihan per Rental</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr><th>Rental</th><th>Customer</th><th>Biaya Sewa</th><th>Denda</th><th>Total Tagihan</th><th>Terbayar</th><th>Sisa</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            {% for item in rentals %}
+            {% if item.status != 'Dibatalkan' %}
+            <tr>
+                <td><strong>{{ item.id }}</strong></td>
+                <td>{{ item.customer_nama }}</td>
+                <td>{{ item.total_biaya | rupiah }}</td>
+                <td>{{ item.total_denda | rupiah }}</td>
+                <td><strong>{{ item.total_tagihan | rupiah }}</strong></td>
+                <td>{{ item.terbayar | rupiah }}</td>
+                <td>{{ item.sisa | rupiah }}</td>
+                <td>{% if item.status_bayar == 'Lunas' %}<span class="badge badge-success">Lunas</span>{% else %}<span class="badge badge-warning">{{ item.status_bayar }}</span>{% endif %}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <h2>Riwayat Pembayaran</h2>
@@ -43,6 +70,7 @@
                 <th>ID Rental</th>
                 <th>Jumlah</th>
                 <th>Metode</th>
+                <th>Biaya Admin</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -54,7 +82,8 @@
                 <td>{{ item.rental_id }}</td>
                 <td><strong>{{ item.jumlah | rupiah }}</strong></td>
                 <td>{{ item.metode }}</td>
-                <td><span class="badge badge-success">{{ item.status }}</span></td>
+                <td>{{ item.biaya_admin | default(0) | rupiah }}</td>
+                <td>{% if item.status == 'Lunas' %}<span class="badge badge-success">{{ item.status }}</span>{% else %}<span class="badge badge-warning">{{ item.status }}</span>{% endif %}</td>
                 <td class="action-cell">
                     <button class="button secondary button-sm" onclick="bukaEditBayar('{{ item.id }}', '{{ item.jumlah }}', '{{ item.metode }}', '{{ item.status }}')">
                         <i class="fa-solid fa-pen-to-square"></i> Edit
