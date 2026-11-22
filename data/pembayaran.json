@@ -2,24 +2,32 @@
     {
         "id": "P001",
         "rental_id": "R001",
-        "jumlah": 175000.0,
+        "jumlah": 90.0,
+        "metode": "Transfer",
+        "status": "Lunas",
+        "biaya_admin": 2500
+    },
+    {
+        "id": "P002",
+        "rental_id": "R001",
+        "jumlah": 90160.0,
         "metode": "Cash",
         "status": "Lunas",
         "biaya_admin": 0
     },
     {
-        "id": "P002",
-        "rental_id": "R001",
-        "jumlah": 100000.0,
-        "metode": "Cash",
-        "status": "Pending",
-        "biaya_admin": 0
+        "id": "P003",
+        "rental_id": "R002",
+        "jumlah": 190000.0,
+        "metode": "E-Wallet",
+        "status": "Lunas",
+        "biaya_admin": 1330
     },
     {
-        "id": "P003",
+        "id": "P004",
         "rental_id": "R003",
-        "jumlah": 1750000.0,
-        "metode": "Transfer",
+        "jumlah": 200000.0,
+        "metode": "Cash",
         "status": "Lunas",
         "biaya_admin": 0
     }

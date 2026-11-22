@@ -1,29 +1,202 @@
 [
     {
         "id": "R001",
-        "customer_id": "C001",
-        "kendaraan_id": "M001",
-        "tanggal_sewa": "2026-09-30",
+        "customer_id": "C002",
+        "kendaraan_id": "K004",
+        "tanggal_sewa": "2026-11-22",
         "lama_sewa": 1,
-        "total_biaya": 175000.0,
-        "status": "Selesai"
+        "total_biaya": 90250,
+        "status": "Selesai",
+        "paket": "member"
     },
     {
         "id": "R002",
-        "customer_id": "C003",
-        "kendaraan_id": "M005",
-        "tanggal_sewa": "2026-10-02",
-        "lama_sewa": 1,
-        "total_biaya": 100000.0,
-        "status": "Berjalan"
+        "customer_id": "C001",
+        "kendaraan_id": "M001",
+        "tanggal_sewa": "2026-11-22",
+        "lama_sewa": 2,
+        "total_biaya": 190000,
+        "status": "Selesai",
+        "paket": "member"
     },
     {
         "id": "R003",
-        "customer_id": "C002",
-        "kendaraan_id": "M001",
-        "tanggal_sewa": "2026-10-01",
-        "lama_sewa": 10,
-        "total_biaya": 1750000.0,
-        "status": "Selesai"
+        "customer_id": "C003",
+        "kendaraan_id": "M002",
+        "tanggal_sewa": "2026-11-20",
+        "lama_sewa": 3,
+        "total_biaya": 750000,
+        "status": "Selesai",
+        "paket": "reguler"
+    },
+    {
+        "id": "R004",
+        "customer_id": "C004",
+        "kendaraan_id": "M003",
+        "tanggal_sewa": "2026-11-21",
+        "lama_sewa": 2,
+        "total_biaya": 342000,
+        "status": "Berjalan",
+        "paket": "member"
+    },
+    {
+        "id": "R005",
+        "customer_id": "C005",
+        "kendaraan_id": "K002",
+        "tanggal_sewa": "2026-11-21",
+        "lama_sewa": 2,
+        "total_biaya": 220000,
+        "status": "Berjalan",
+        "paket": "reguler"
+    },
+    {
+        "id": "R006",
+        "customer_id": "C006",
+        "kendaraan_id": "M004",
+        "tanggal_sewa": "2026-11-18",
+        "lama_sewa": 2,
+        "total_biaya": 532000,
+        "status": "Selesai",
+        "paket": "member"
+    },
+    {
+        "id": "R007",
+        "customer_id": "C007",
+        "kendaraan_id": "M005",
+        "tanggal_sewa": "2026-11-19",
+        "lama_sewa": 1,
+        "total_biaya": 350000,
+        "status": "Selesai",
+        "paket": "reguler"
+    },
+    {
+        "id": "R008",
+        "customer_id": "C008",
+        "kendaraan_id": "K001",
+        "tanggal_sewa": "2026-11-17",
+        "lama_sewa": 3,
+        "total_biaya": 213750,
+        "status": "Selesai",
+        "paket": "member"
+    },
+    {
+        "id": "R009",
+        "customer_id": "C009",
+        "kendaraan_id": "M007",
+        "tanggal_sewa": "2026-11-22",
+        "lama_sewa": 2,
+        "total_biaya": 456000,
+        "status": "Berjalan",
+        "paket": "member"
+    },
+    {
+        "id": "R010",
+        "customer_id": "C010",
+        "kendaraan_id": "K003",
+        "tanggal_sewa": "2026-11-16",
+        "lama_sewa": 2,
+        "total_biaya": 210000,
+        "status": "Selesai",
+        "paket": "reguler"
+    },
+    {
+        "id": "R011",
+        "customer_id": "C011",
+        "kendaraan_id": "M008",
+        "tanggal_sewa": "2026-11-15",
+        "lama_sewa": 3,
+        "total_biaya": 1140000,
+        "status": "Selesai",
+        "paket": "member"
+    },
+    {
+        "id": "R012",
+        "customer_id": "C012",
+        "kendaraan_id": "K005",
+        "tanggal_sewa": "2026-11-22",
+        "lama_sewa": 1,
+        "total_biaya": 80000,
+        "status": "Berjalan",
+        "paket": "reguler"
+    },
+    {
+        "id": "R013",
+        "customer_id": "C013",
+        "kendaraan_id": "M009",
+        "tanggal_sewa": "2026-11-14",
+        "lama_sewa": 2,
+        "total_biaya": 285000,
+        "status": "Selesai",
+        "paket": "member"
+    },
+    {
+        "id": "R014",
+        "customer_id": "C014",
+        "kendaraan_id": "M010",
+        "tanggal_sewa": "2026-11-21",
+        "lama_sewa": 3,
+        "total_biaya": 960000,
+        "status": "Berjalan",
+        "paket": "reguler"
+    },
+    {
+        "id": "R015",
+        "customer_id": "C015",
+        "kendaraan_id": "K006",
+        "tanggal_sewa": "2026-11-13",
+        "lama_sewa": 4,
+        "total_biaya": 342000,
+        "status": "Selesai",
+        "paket": "member"
+    },
+    {
+        "id": "R016",
+        "customer_id": "C016",
+        "kendaraan_id": "M011",
+        "tanggal_sewa": "2026-11-12",
+        "lama_sewa": 2,
+        "total_biaya": 340000,
+        "status": "Selesai",
+        "paket": "reguler"
+    },
+    {
+        "id": "R017",
+        "customer_id": "C017",
+        "kendaraan_id": "M012",
+        "tanggal_sewa": "2026-11-11",
+        "lama_sewa": 1,
+        "total_biaya": 256500,
+        "status": "Selesai",
+        "paket": "member"
+    },
+    {
+        "id": "R018",
+        "customer_id": "C018",
+        "kendaraan_id": "K007",
+        "tanggal_sewa": "2026-11-10",
+        "lama_sewa": 3,
+        "total_biaya": 210000,
+        "status": "Selesai",
+        "paket": "reguler"
+    },
+    {
+        "id": "R019",
+        "customer_id": "C019",
+        "kendaraan_id": "M013",
+        "tanggal_sewa": "2026-11-22",
+        "lama_sewa": 2,
+        "total_biaya": 798000,
+        "status": "Berjalan",
+        "paket": "member"
+    },
+    {
+        "id": "R020",
+        "customer_id": "C020",
+        "kendaraan_id": "M006",
+        "tanggal_sewa": "2026-11-09",
+        "lama_sewa": 2,
+        "total_biaya": 350000,
+        "status": "Selesai",
+        "paket": "reguler"
     }
 ]

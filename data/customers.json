@@ -1,34 +1,162 @@
 [
     {
         "id": "C001",
-        "nama": "Mely Susantika Dewi",
-        "username": "melysusantika",
-        "password": "Melly123",
-        "no_ktp": "35270000",
-        "no_hp": "0810000000000"
+        "nama": "Fathul Amin",
+        "username": "Amin",
+        "password": "1234",
+        "no_ktp": "3528713768425423",
+        "no_hp": "0818373784782"
     },
     {
         "id": "C002",
-        "nama": "Fathul Amin",
-        "username": "Amin",
-        "password": "2346",
-        "no_ktp": "35270001",
-        "no_hp": "0810000000001"
+        "nama": "Siti Nurhaliza",
+        "username": "siti_n",
+        "password": "1234",
+        "no_ktp": "3528014502980002",
+        "no_hp": "0812345678902"
     },
     {
         "id": "C003",
-        "nama": "Azka Syaikhu",
-        "username": "Azka",
-        "password": "12345",
-        "no_ktp": "35270002",
-        "no_hp": "0810000000002"
+        "nama": "Ahmad Rizky",
+        "username": "rizky_a",
+        "password": "1234",
+        "no_ktp": "3528021205950003",
+        "no_hp": "0813456789013"
     },
     {
         "id": "C004",
-        "nama": "Elsa Maria Hutahean",
-        "username": "Elsa",
-        "password": "4536",
-        "no_ktp": "35270003",
-        "no_hp": "0810000000003"
+        "nama": "Dewi Lestari",
+        "username": "dewi_l",
+        "password": "1234",
+        "no_ktp": "3528035508990004",
+        "no_hp": "0815567890124"
+    },
+    {
+        "id": "C005",
+        "nama": "Budi Santoso",
+        "username": "budi_s",
+        "password": "1234",
+        "no_ktp": "3528041911920005",
+        "no_hp": "0816678901235"
+    },
+    {
+        "id": "C006",
+        "nama": "Nadia Putri",
+        "username": "nadia_p",
+        "password": "1234",
+        "no_ktp": "3528056003010006",
+        "no_hp": "0817789012346"
+    },
+    {
+        "id": "C007",
+        "nama": "Rian Hidayat",
+        "username": "rian_h",
+        "password": "1234",
+        "no_ktp": "3528060807970007",
+        "no_hp": "0818890123457"
+    },
+    {
+        "id": "C008",
+        "nama": "Ayu Kartika",
+        "username": "ayu_k",
+        "password": "1234",
+        "no_ktp": "3528074701000008",
+        "no_hp": "0819901234568"
+    },
+    {
+        "id": "C009",
+        "nama": "Hendra Wijaya",
+        "username": "hendra_w",
+        "password": "1234",
+        "no_ktp": "3528082309940009",
+        "no_hp": "0821112345679"
+    },
+    {
+        "id": "C010",
+        "nama": "Laila Rahmawati",
+        "username": "laila_r",
+        "password": "1234",
+        "no_ktp": "3528095112980010",
+        "no_hp": "0822223456780"
+    },
+    {
+        "id": "C011",
+        "nama": "Dimas Pratama",
+        "username": "dimas_p",
+        "password": "1234",
+        "no_ktp": "3528101404960011",
+        "no_hp": "0823334567891"
+    },
+    {
+        "id": "C012",
+        "nama": "Putri Maharani",
+        "username": "putri_m",
+        "password": "1234",
+        "no_ktp": "3528116806020012",
+        "no_hp": "0851445678902"
+    },
+    {
+        "id": "C013",
+        "nama": "Zainal Abidin",
+        "username": "zainal_a",
+        "password": "1234",
+        "no_ktp": "3528120302910013",
+        "no_hp": "0852556789013"
+    },
+    {
+        "id": "C014",
+        "nama": "Intan Permata",
+        "username": "intan_p",
+        "password": "1234",
+        "no_ktp": "3528134210010014",
+        "no_hp": "0853667890124"
+    },
+    {
+        "id": "C015",
+        "nama": "Bagus Setiawan",
+        "username": "bagus_s",
+        "password": "1234",
+        "no_ktp": "3528142705930015",
+        "no_hp": "0856778901235"
+    },
+    {
+        "id": "C016",
+        "nama": "Rina Marlina",
+        "username": "rina_m",
+        "password": "1234",
+        "no_ktp": "3528155908990016",
+        "no_hp": "0857889012346"
+    },
+    {
+        "id": "C017",
+        "nama": "Yusuf Maulana",
+        "username": "yusuf_m",
+        "password": "1234",
+        "no_ktp": "3528161101970017",
+        "no_hp": "0858990123457"
+    },
+    {
+        "id": "C018",
+        "nama": "Mega Kusuma",
+        "username": "mega_k",
+        "password": "1234",
+        "no_ktp": "3528176411000018",
+        "no_hp": "0877101234568"
+    },
+    {
+        "id": "C019",
+        "nama": "Taufik Hidayat",
+        "username": "taufik_h",
+        "password": "1234",
+        "no_ktp": "3528182007950019",
+        "no_hp": "0878212345679"
+    },
+    {
+        "id": "C020",
+        "nama": "Vina Anggraini",
+        "username": "vina_a",
+        "password": "1234",
+        "no_ktp": "3528194903020020",
+        "no_hp": "0896323456780"
     }
 ]

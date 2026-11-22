@@ -1,1 +1,152 @@
-[]
+[
+    {
+        "waktu": "2026-11-22 19:40:30",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M001 Tesla (M 4573 BA)"
+    },
+    {
+        "waktu": "2026-11-22 19:41:05",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M002 Toyota Avanza (M 1829 NC)"
+    },
+    {
+        "waktu": "2026-11-22 19:41:32",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M003 Honda Brio (M 3041 HB)"
+    },
+    {
+        "waktu": "2026-11-22 19:41:58",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M004 Mitsubishi Xpander (M 7720 KA)"
+    },
+    {
+        "waktu": "2026-11-22 19:42:20",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M005 Hyundai Ioniq 5 (M 5194 PA)"
+    },
+    {
+        "waktu": "2026-11-22 19:42:45",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M006 Daihatsu Sigra (M 1108 DA)"
+    },
+    {
+        "waktu": "2026-11-22 19:43:10",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M007 Suzuki Ertiga (M 9245 EA)"
+    },
+    {
+        "waktu": "2026-11-22 19:43:35",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M008 Toyota Innova Reborn (M 6731 FA)"
+    },
+    {
+        "waktu": "2026-11-22 19:44:02",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M009 Wuling Air ev (M 4822 GA)"
+    },
+    {
+        "waktu": "2026-11-22 19:44:28",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M010 Honda HR-V (M 8390 IA)"
+    },
+    {
+        "waktu": "2026-11-22 19:44:55",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M011 Toyota Agya (M 2947 JA)"
+    },
+    {
+        "waktu": "2026-11-22 19:45:18",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M012 Daihatsu Terios (M 7516 LA)"
+    },
+    {
+        "waktu": "2026-11-22 19:45:44",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "M013 BYD Seal (M 3684 MA)"
+    },
+    {
+        "waktu": "2026-11-22 19:46:12",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K001 Honda Beat (M 6412 RA)"
+    },
+    {
+        "waktu": "2026-11-22 19:46:39",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K002 Yamaha NMAX (M 8903 SA)"
+    },
+    {
+        "waktu": "2026-11-22 19:47:05",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K003 Yamaha Aerox (M 2358 TA)"
+    },
+    {
+        "waktu": "2026-11-22 19:47:31",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K004 Honda Vario 160 (M 5019 UA)"
+    },
+    {
+        "waktu": "2026-11-22 19:47:58",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K005 Honda Scoopy (M 7164 VA)"
+    },
+    {
+        "waktu": "2026-11-22 19:48:24",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K006 Yamaha Lexi (M 4295 WA)"
+    },
+    {
+        "waktu": "2026-11-22 19:48:50",
+        "aksi": "KENDARAAN_TAMBAH",
+        "detail": "K007 Suzuki Address (M 9812 XA)"
+    },
+    {
+        "waktu": "2026-11-22 19:44:54",
+        "aksi": "CUSTOMER_TAMBAH",
+        "detail": "C001 Fathul Amin"
+    },
+    {
+        "waktu": "2026-11-22 19:46:17",
+        "aksi": "RENTAL_BARU",
+        "detail": "R001: C002 sewa K004 1 hari (member) = Rp 90.250"
+    },
+    {
+        "waktu": "2026-11-22 19:48:46",
+        "aksi": "RENTAL_EDIT",
+        "detail": "R004: 2 hari, Rp 342.000"
+    },
+    {
+        "waktu": "2026-11-22 19:48:53",
+        "aksi": "RENTAL_EDIT",
+        "detail": "R009: 2 hari, Rp 456.000"
+    },
+    {
+        "waktu": "2026-11-22 19:49:32",
+        "aksi": "PEMBAYARAN",
+        "detail": "R001: Rp 90 via Transfer (admin Rp 2.500)"
+    },
+    {
+        "waktu": "2026-11-22 19:49:49",
+        "aksi": "PEMBAYARAN",
+        "detail": "R001: Rp 90.160 via Cash (admin Rp 0)"
+    },
+    {
+        "waktu": "2026-11-22 19:50:10",
+        "aksi": "PEMBAYARAN",
+        "detail": "R002: Rp 190.000 via E-Wallet (admin Rp 1.330)"
+    },
+    {
+        "waktu": "2026-11-22 19:50:23",
+        "aksi": "PEMBAYARAN",
+        "detail": "R003: Rp 200.000 via Cash (admin Rp 0)"
+    },
+    {
+        "waktu": "2026-11-22 19:51:03",
+        "aksi": "PENGEMBALIAN",
+        "detail": "R001: kondisi Baik, telat 1 hari, denda Rp 100.000"
+    },
+    {
+        "waktu": "2026-11-22 19:52:17",
+        "aksi": "PENGEMBALIAN",
+        "detail": "R002: kondisi Rusak Ringan, telat 1 hari, denda Rp 119.000"
+    }
+]

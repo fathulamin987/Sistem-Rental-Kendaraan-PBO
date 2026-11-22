@@ -1,8 +1,16 @@
 [
     {
         "id": "D001",
-        "rental_id": "R003",
-        "hari_terlambat": 2,
-        "jumlah_denda": 100000
+        "rental_id": "R001",
+        "hari_terlambat": 1,
+        "jumlah_denda": 100000,
+        "keterangan": "Telat 1 hari: Rp 100.000"
+    },
+    {
+        "id": "D002",
+        "rental_id": "R002",
+        "hari_terlambat": 1,
+        "jumlah_denda": 119000,
+        "keterangan": "Telat 1 hari: Rp 100.000; Rusak Ringan: Rp 19.000"
     }
 ]

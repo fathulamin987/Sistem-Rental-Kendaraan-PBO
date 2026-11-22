@@ -1,47 +1,182 @@
 [
     {
         "id": "M001",
-        "nomor_plat": "L 5757 KL",
-        "merk": "Avanza",
-        "harga_sewa": 175000.0,
-        "tersedia": true,
-        "jenis": "Mobil",
-        "jumlah_kursi": 6
-    },
-    {
-        "id": "M002",
-        "nomor_plat": "L 1023 AA",
-        "merk": "Ayla",
-        "harga_sewa": 150000.0,
+        "nomor_plat": "M 4573 BA",
+        "merk": "Tesla",
+        "harga_sewa": 100000.0,
         "tersedia": true,
         "jenis": "Mobil",
         "jumlah_kursi": 5
     },
     {
-        "id": "M003",
-        "nomor_plat": "L 1234 MB",
-        "merk": "Calya",
-        "harga_sewa": 200000.0,
+        "id": "M002",
+        "nomor_plat": "M 1829 NC",
+        "merk": "Toyota Avanza",
+        "harga_sewa": 250000.0,
         "tersedia": true,
         "jenis": "Mobil",
         "jumlah_kursi": 7
     },
     {
+        "id": "M003",
+        "nomor_plat": "M 3041 HB",
+        "merk": "Honda Brio",
+        "harga_sewa": 180000.0,
+        "tersedia": false,
+        "jenis": "Mobil",
+        "jumlah_kursi": 5
+    },
+    {
         "id": "M004",
-        "nomor_plat": "L 9999 RV",
-        "merk": "Innova Reborn",
-        "harga_sewa": 450000.0,
+        "nomor_plat": "M 7720 KA",
+        "merk": "Mitsubishi Xpander",
+        "harga_sewa": 280000.0,
         "tersedia": true,
         "jenis": "Mobil",
         "jumlah_kursi": 7
     },
     {
         "id": "M005",
-        "nomor_plat": "M 4573 BA",
-        "merk": "Tesla",
-        "harga_sewa": 100000.0,
+        "nomor_plat": "M 5194 PA",
+        "merk": "Hyundai Ioniq 5",
+        "harga_sewa": 350000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 5
+    },
+    {
+        "id": "M006",
+        "nomor_plat": "M 1108 DA",
+        "merk": "Daihatsu Sigra",
+        "harga_sewa": 175000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 7
+    },
+    {
+        "id": "M007",
+        "nomor_plat": "M 9245 EA",
+        "merk": "Suzuki Ertiga",
+        "harga_sewa": 240000.0,
         "tersedia": false,
         "jenis": "Mobil",
-        "jumlah_kursi": 1
+        "jumlah_kursi": 7
+    },
+    {
+        "id": "M008",
+        "nomor_plat": "M 6731 FA",
+        "merk": "Toyota Innova Reborn",
+        "harga_sewa": 400000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 7
+    },
+    {
+        "id": "M009",
+        "nomor_plat": "M 4822 GA",
+        "merk": "Wuling Air ev",
+        "harga_sewa": 150000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 4
+    },
+    {
+        "id": "M010",
+        "nomor_plat": "M 8390 IA",
+        "merk": "Honda HR-V",
+        "harga_sewa": 320000.0,
+        "tersedia": false,
+        "jenis": "Mobil",
+        "jumlah_kursi": 5
+    },
+    {
+        "id": "M011",
+        "nomor_plat": "M 2947 JA",
+        "merk": "Toyota Agya",
+        "harga_sewa": 170000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 5
+    },
+    {
+        "id": "M012",
+        "nomor_plat": "M 7516 LA",
+        "merk": "Daihatsu Terios",
+        "harga_sewa": 270000.0,
+        "tersedia": true,
+        "jenis": "Mobil",
+        "jumlah_kursi": 7
+    },
+    {
+        "id": "M013",
+        "nomor_plat": "M 3684 MA",
+        "merk": "BYD Seal",
+        "harga_sewa": 420000.0,
+        "tersedia": false,
+        "jenis": "Mobil",
+        "jumlah_kursi": 5
+    },
+    {
+        "id": "K001",
+        "nomor_plat": "M 6412 RA",
+        "merk": "Honda Beat",
+        "harga_sewa": 75000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
+    },
+    {
+        "id": "K002",
+        "nomor_plat": "M 8903 SA",
+        "merk": "Yamaha NMAX",
+        "harga_sewa": 110000.0,
+        "tersedia": false,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
+    },
+    {
+        "id": "K003",
+        "nomor_plat": "M 2358 TA",
+        "merk": "Yamaha Aerox",
+        "harga_sewa": 105000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
+    },
+    {
+        "id": "K004",
+        "nomor_plat": "M 5019 UA",
+        "merk": "Honda Vario 160",
+        "harga_sewa": 95000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
+    },
+    {
+        "id": "K005",
+        "nomor_plat": "M 7164 VA",
+        "merk": "Honda Scoopy",
+        "harga_sewa": 80000.0,
+        "tersedia": false,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
+    },
+    {
+        "id": "K006",
+        "nomor_plat": "M 4295 WA",
+        "merk": "Yamaha Lexi",
+        "harga_sewa": 90000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
+    },
+    {
+        "id": "K007",
+        "nomor_plat": "M 9812 XA",
+        "merk": "Suzuki Address",
+        "harga_sewa": 70000.0,
+        "tersedia": true,
+        "jenis": "Motor",
+        "jumlah_kursi": 2
     }
 ]
